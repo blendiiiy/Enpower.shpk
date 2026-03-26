@@ -9,10 +9,19 @@ export const metadata: Metadata = {
     'Projektet energjetike të Enpower sh.p.k në Kosovë: linja TL/TM, trafostacione dhe ndriçim publik me zbatim profesional.',
   alternates: { canonical: `${base}/projects` },
   openGraph: {
+    type: 'website',
     title: 'Projektet tona | Enpower sh.p.k',
     description:
       'Shikoni projektet e realizuara nga Enpower sh.p.k në rrjete elektrike, trafostacione dhe ndriçim.',
     url: `${base}/projects`,
+    images: [
+      {
+        url: `${base}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Enpower sh.p.k',
+      },
+    ],
   },
 }
 

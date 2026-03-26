@@ -9,10 +9,19 @@ export const metadata: Metadata = {
     'Shërbime profesionale energjetike në Kosovë: rrjete elektrike TL/TM, trafostacione, trafo private dhe ndriçim publik/industrial.',
   alternates: { canonical: `${base}/services` },
   openGraph: {
+    type: 'website',
     title: 'Shërbimet tona | Enpower sh.p.k',
     description:
       'Rrjete elektrike TL/TM, trafostacione, trafo private dhe ndriçim publik/industrial me standard profesional.',
     url: `${base}/services`,
+    images: [
+      {
+        url: `${base}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Enpower sh.p.k',
+      },
+    ],
   },
 }
 

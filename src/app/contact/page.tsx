@@ -8,10 +8,19 @@ export const metadata: Metadata = {
     'Kontaktoni Enpower sh.p.k për ofertë dhe bashkëpunim në projekte energjetike në Kosovë. Përgjigje e shpejtë nga ekipi profesional.',
   alternates: { canonical: `${base}/contact` },
   openGraph: {
+    type: 'website',
     title: 'Kontakti | Enpower sh.p.k',
     description:
       'Na kontaktoni për ofertë në rrjete elektrike, trafostacione dhe ndriçim. Ekip profesional në Kosovë.',
     url: `${base}/contact`,
+    images: [
+      {
+        url: `${base}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Enpower sh.p.k',
+      },
+    ],
   },
 }
 

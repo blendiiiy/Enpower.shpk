@@ -14,10 +14,19 @@ export const metadata: Metadata = {
     'Enpower sh.p.k ofron zgjidhje profesionale në energji elektrike në Kosovë: TL/TM, trafostacione, ndriçim dhe mirëmbajtje.',
   alternates: { canonical: base },
   openGraph: {
+    type: 'website',
     title: 'Enpower sh.p.k | Zgjidhje Profesionale në Energji Elektrike',
     description:
       'Partneri juaj për projekte energjetike të sigurta, efikase dhe profesionale në Kosovë.',
     url: base,
+    images: [
+      {
+        url: `${base}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Enpower sh.p.k',
+      },
+    ],
   },
 }
 

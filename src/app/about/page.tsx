@@ -10,10 +10,19 @@ export const metadata: Metadata = {
     'Njihuni me Enpower sh.p.k: ekip profesional për rrjete elektrike TL/TM, trafostacione dhe ndriçim. Zbatim i sigurt dhe profesional në Kosovë.',
   alternates: { canonical: `${base}/about` },
   openGraph: {
+    type: 'website',
     title: 'Rreth nesh | Enpower sh.p.k',
     description:
       'Njihuni me Enpower sh.p.k: ekip profesional për rrjete elektrike TL/TM, trafostacione dhe ndriçim.',
     url: `${base}/about`,
+    images: [
+      {
+        url: `${base}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: 'Enpower sh.p.k',
+      },
+    ],
   },
 }
 

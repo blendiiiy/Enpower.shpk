@@ -48,20 +48,12 @@ export default function ContactPage() {
           <p className="section-subtitle mx-auto">
             Na kontaktoni për bashkëpunim dhe projekte energjetike.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-2.5">
-            <span className="rounded-full border border-amber-500/25 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-700 dark:text-amber-300">
-              Përgjigje e shpejtë
-            </span>
-            <span className="rounded-full border border-slate-300/70 dark:border-slate-700/70 bg-white/80 dark:bg-slate-900/70 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Konsultim profesional
-            </span>
-            <span className="rounded-full border border-slate-300/70 dark:border-slate-700/70 bg-white/80 dark:bg-slate-900/70 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Ofertë sipas projektit
-            </span>
-          </div>
+          <p className="mt-5 text-sm text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+            Përgjigje e shpejtë · Konsultim profesional · Ofertë sipas projektit
+          </p>
         </header>
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
-          <section className="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 backdrop-blur-sm p-8 sm:p-10 shadow-card">
+          <section className="rounded-2xl border border-slate-100 dark:border-slate-700/70 bg-white dark:bg-slate-900/80 backdrop-blur-sm p-8 sm:p-10 shadow-card">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Të dhënat e kontaktit
             </h2>
@@ -74,7 +66,7 @@ export default function ContactPage() {
                 <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Email</span>
                 <a
                   href={`mailto:${contactEmail}`}
-                  className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors underline underline-offset-2"
+                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors underline underline-offset-2"
                 >
                   {contactEmail}
                 </a>
@@ -83,7 +75,7 @@ export default function ContactPage() {
                 <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Telefon</span>
                 <a
                   href={`tel:${phoneTel}`}
-                  className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
                 >
                   {contactPhone}
                 </a>
@@ -94,14 +86,14 @@ export default function ContactPage() {
                   href="https://www.facebook.com/EnpowerShpk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors underline underline-offset-2"
+                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors underline underline-offset-2"
                 >
                   Enpower sh.p.k
                 </a>
               </li>
             </ul>
           </section>
-          <section className="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-900/50 backdrop-blur-sm p-8 sm:p-10 shadow-card">
+          <section className="rounded-2xl border border-slate-100 dark:border-slate-700/70 bg-white dark:bg-slate-900/55 backdrop-blur-sm p-8 sm:p-10 shadow-card">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Dërgoni një mesazh
             </h2>

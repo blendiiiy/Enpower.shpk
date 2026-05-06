@@ -10,14 +10,15 @@ export default function AppleIcon() {
         style={{
           fontSize: 72,
           fontWeight: 800,
-          background: '#0f172a',
-          color: '#facc15',
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
+          color: '#ffffff',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 24,
+          border: '3px solid rgba(255, 255, 255, 0.35)',
         }}
       >
         E

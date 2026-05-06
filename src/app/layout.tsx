@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { StructuredData } from '@/components/StructuredData'
 import { BackToTop } from '@/components/BackToTop'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -14,8 +15,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0f1c' },
   ],
 }
 
@@ -85,17 +86,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sq" className={plusJakarta.variable}>
-      <body className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased subpixel-antialiased">
+      <body className="min-h-screen bg-page text-slate-900 dark:text-slate-100 font-sans antialiased subpixel-antialiased">
         <StructuredData />
         <a
           href="#main"
-          className="fixed left-4 top-4 z-[100] -translate-y-16 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 shadow-lg transition focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+          className="fixed left-4 top-4 z-[100] -translate-y-16 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2"
         >
           Kalo te përmbajtja
         </a>
         <Header />
         <main id="main" className="flex-1 scroll-mt-20">{children}</main>
         <Footer />
+        <WhatsAppButton />
         <BackToTop />
       </body>
     </html>

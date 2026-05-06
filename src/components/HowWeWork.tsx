@@ -22,9 +22,9 @@ export function HowWeWork() {
           {steps.map(({ num, title }) => (
             <div
               key={num}
-              className="relative rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-900/50 backdrop-blur-sm p-6 sm:p-8 text-center shadow-card hover:shadow-card-hover hover:border-amber-500/30 dark:hover:border-amber-500/30 hover:-translate-y-0.5 transition-all duration-300"
+              className="relative rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/50 backdrop-blur-sm p-6 sm:p-8 text-center shadow-card hover:shadow-card-hover hover:border-brand-400/45 dark:hover:border-brand-600/35 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-lg font-bold text-slate-900 shadow-md">
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-brand-700 text-lg font-bold text-white shadow-md">
                 {num}
               </span>
               <h3 className="mt-5 text-base font-semibold text-slate-900 dark:text-white leading-snug">

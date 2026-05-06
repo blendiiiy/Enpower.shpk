@@ -51,16 +51,13 @@ export default function AboutPage() {
             <p className="mt-6 text-slate-600 dark:text-slate-400 leading-relaxed">
               Misioni ynë është të ofrojmë zgjidhje energjetike të besueshme, që mbështesin zhvillimin industrial dhe infrastrukturor të Kosovës.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/services" className="cta-inline">
-                Shiko shërbimet →
-              </Link>
-              <Link href="/contact" className="cta-inline">
-                Kërko ofertë →
+            <div className="mt-8">
+              <Link href="/contact" className="btn-primary">
+                Kërko ofertë
               </Link>
             </div>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200/50 dark:ring-slate-700/50 bg-slate-100 dark:bg-slate-800/40 p-2">
+          <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-slate-200/70 dark:ring-slate-700/50 bg-white dark:bg-slate-900/35 p-2">
             <ImageWithFallback
               src={images.about}
               alt="Enpower sh.p.k — Ekipi dhe projekte energjetike"

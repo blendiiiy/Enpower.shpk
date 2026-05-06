@@ -5,11 +5,8 @@
 :root {
   --foreground: #0f172a;
   --background: #ffffff;
-  --primary: #eab308;
-  --primary-dark: #ca8a04;
-  --accent: #0ea5e9;
-  --gradient-start: #f59e0b;
-  --gradient-end: #eab308;
+  --accent: #2563eb;
+  --brand-blue: #1e40af;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,24 +20,27 @@ body {
   color: var(--foreground);
   background: var(--background);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
 }
 
-/* Selection */
 ::selection {
-  background-color: rgba(234, 179, 8, 0.25);
+  background-color: rgba(37, 99, 235, 0.18);
   color: inherit;
 }
 
-/* Subtle grid background for sections */
+/* Grid shumë i lehtë — bardh + vijë kaltër e hollë */
 .bg-grid-pattern {
+  background-color: #ffffff;
   background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(to right, rgba(30, 64, 175, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 64, 175, 0.028) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.dark .bg-grid-pattern,
 .dark .bg-grid-pattern {
+  background-color: transparent;
   background-image:
     linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
@@ -51,52 +51,78 @@ body {
     text-wrap: balance;
   }
   .section-title-accent {
-    @apply mx-auto mt-4 h-1 w-12 rounded-full bg-gradient-to-r from-amber-500 to-amber-400;
+    @apply mx-auto mt-4 h-1 w-14 rounded-full bg-gradient-to-r from-brand-600 to-brand-700;
   }
   .section-title-accent-left {
-    @apply mt-4 h-1 w-12 rounded-full bg-gradient-to-r from-amber-500 to-amber-400;
+    @apply mt-4 h-1 w-14 rounded-full bg-gradient-to-r from-brand-600 to-brand-700;
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800;
   }
   .card-hover {
     @apply transition-all duration-300 ease-out;
   }
   .section-shell {
-    @apply relative py-16 sm:py-20 lg:py-24 bg-grid-pattern min-h-screen;
+    @apply relative py-16 sm:py-20 lg:py-24 bg-grid-pattern min-h-screen bg-white dark:bg-brand-950;
   }
   .section-container {
     @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
   }
   .section-header {
-    @apply mb-14 sm:mb-16;
+    @apply mb-12 sm:mb-14 lg:mb-16;
   }
   .section-title {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white text-balance;
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white text-balance leading-[1.05];
   }
   .section-subtitle {
-    @apply mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed;
+    @apply mt-4 text-lg text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed;
   }
   .eyebrow {
-    @apply text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-amber-500 dark:text-amber-400;
+    @apply text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-brand-700 dark:text-blue-400;
   }
   .surface-card {
-    @apply rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm shadow-card;
+    @apply rounded-2xl border border-slate-100 dark:border-slate-700/60 bg-white dark:bg-slate-900/70 backdrop-blur-sm shadow-card;
+  }
+  .surface-card-premium {
+    @apply surface-card transition-all duration-300;
+    @apply hover:shadow-card-hover hover:-translate-y-0.5 hover:border-slate-300 dark:hover:border-brand-600/45;
   }
   .cta-inline {
-    @apply inline-flex items-center gap-2 text-sm font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors;
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-brand-700 dark:text-blue-400 hover:text-brand-800 dark:hover:text-blue-300 transition-colors;
+  }
+  .bg-page {
+    @apply bg-white dark:bg-brand-950;
+  }
+  /* CTA kryesor: kaltër modern (jo mjaltë) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-600/25 transition-all duration-300;
+    @apply hover:from-brand-500 hover:to-brand-600 hover:shadow-glow;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-brand-950;
+  }
+  .btn-primary-lg {
+    @apply px-8 py-4 text-base rounded-2xl;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-100 transition-all duration-300;
+    @apply hover:bg-sky-50/60 dark:hover:bg-slate-800 hover:border-brand-400/40 dark:hover:border-brand-500/45;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-brand-950;
   }
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Gradient overlay for hero (over dark bg) */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* Hero: vetëm blu + dritë — pa ton mjaltë */
 .gradient-mesh {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(234, 179, 8, 0.15), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(234, 179, 8, 0.06), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 20% 60%, rgba(14, 165, 233, 0.05), transparent 50%);
+    radial-gradient(ellipse 90% 60% at 50% -30%, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 88% 55%, rgba(37, 99, 235, 0.14), transparent 52%),
+    radial-gradient(ellipse 50% 45% at 10% 55%, rgba(30, 58, 138, 0.12), transparent 52%);
 }

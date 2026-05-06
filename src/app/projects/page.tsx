@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ProjectsGallery } from '@/components/ProjectsGallery'
+import { galleryItems } from '@/lib/images'
 
 const base = 'https://enpower-ks.com'
 export const metadata: Metadata = {
@@ -36,14 +37,14 @@ export default function ProjectsPage() {
           </h1>
           <div className="section-title-accent-left" aria-hidden />
           <p className="section-subtitle max-w-2xl">
-            Ne kemi realizuar projekte të shumta në terren, duke përfshirë:
+            Çdo projekt përfshin planifikim teknik, zbatim në terren dhe testim final për siguri.
           </p>
-          <Link href="/contact" className="cta-inline mt-6">
-            Planifiko projektin tënd me ekipin tonë →
+          <Link href="/contact" className="btn-primary mt-6">
+            Planifiko projektin tënd
           </Link>
         </header>
         <section className="surface-card p-6 sm:p-8 mb-10 sm:mb-12">
-          <p className="eyebrow">Case Study i shkurtër</p>
+          <p className="eyebrow">Shembull projekti</p>
           <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             Rehabilitim i rrjetit dhe stabilitet më i mirë i furnizimit
           </h2>
@@ -52,10 +53,19 @@ export default function ProjectsPage() {
             instalimin e pajisjeve të reja mbrojtëse dhe optimizimin e pikës së furnizimit.
             Rezultati ishte rritje e sigurisë operacionale dhe funksionim më stabil për përdoruesit lokalë.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2.5">
-            <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">Analizë në terren</span>
-            <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">Instalim i pajisjeve</span>
-            <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">Testim & komisionim</span>
+        </section>
+        <section className="mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Detaje për secilin projekt</h2>
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
+            {galleryItems.map((item) => (
+              <article key={item.id} className="surface-card-premium p-5 sm:p-6">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                <p className="mt-2 text-slate-600 dark:text-slate-400">{item.desc}</p>
+                <p className="mt-4 text-sm text-slate-700 dark:text-slate-300">
+                  Fokus: zbatim i sigurt, standard teknik dhe dorëzim brenda afatit.
+                </p>
+              </article>
+            ))}
           </div>
         </section>
         <ProjectsGallery />

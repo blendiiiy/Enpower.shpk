@@ -4,7 +4,7 @@ import { images } from '@/lib/images'
 
 export function AboutPreview() {
   return (
-    <section className="relative py-20 sm:py-24 lg:py-28 bg-white dark:bg-slate-900 bg-grid-pattern overflow-hidden">
+    <section className="relative py-20 sm:py-24 lg:py-28 bg-white dark:bg-brand-950/80 bg-grid-pattern overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
           <div>
@@ -21,14 +21,32 @@ export function AboutPreview() {
             <p className="mt-5 text-slate-600 dark:text-slate-400 leading-relaxed">
               Misioni ynë është të ofrojmë zgjidhje energjetike të besueshme, që mbështesin zhvillimin industrial dhe infrastrukturor të Kosovës.
             </p>
-            <Link
-              href="/about"
-              className="mt-9 inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3.5 text-sm font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 shadow-md transition-all duration-200"
-            >
-              Mëso më shumë
-            </Link>
+            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { k: 'Siguri', v: 'Procedura dhe kontroll në çdo fazë' },
+                { k: 'Teknikë moderne', v: 'Pajisje dhe praktika bashkëkohore' },
+                { k: 'Saktësi', v: 'Zbatim sipas specifikimeve' },
+              ].map((p) => (
+                <li
+                  key={p.k}
+                  className="rounded-xl border border-slate-100 dark:border-slate-700/70 bg-white dark:bg-slate-900/40 px-4 py-4 shadow-sm"
+                >
+                  <p className="text-sm font-bold text-slate-900 dark:text-white">{p.k}</p>
+                  <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-snug">{p.v}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-9 flex flex-wrap items-center gap-6">
+              <Link href="/about" className="btn-primary">
+                Mëso më shumë
+              </Link>
+              <Link href="/services" className="cta-inline">
+                Shërbimet tona
+                <span aria-hidden> →</span>
+              </Link>
+            </div>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-card-hover ring-1 ring-slate-200/50 dark:ring-slate-700/50 bg-slate-100 dark:bg-slate-800/40 p-2">
+          <div className="relative rounded-2xl overflow-hidden shadow-card-hover ring-1 ring-slate-200/70 dark:ring-slate-700/50 bg-white dark:bg-slate-900/35 p-2 lg:mt-2">
             <ImageWithFallback
               src={images.about}
               alt="Enpower sh.p.k — Ekipi dhe projekte energjetike"

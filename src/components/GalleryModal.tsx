@@ -44,7 +44,7 @@ export function GalleryModal({
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         className="fixed inset-4 sm:inset-6 md:inset-8 z-50 rounded-xl overflow-hidden bg-white dark:bg-slate-900 shadow-2xl flex flex-col"
       >
-        <div className="flex-1 p-4 flex items-center justify-center bg-slate-50 dark:bg-slate-900/50 min-h-0">
+        <div className="flex-1 p-4 flex items-center justify-center bg-white dark:bg-slate-900/50 min-h-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedItem.id}
@@ -109,7 +109,7 @@ export function GalleryModal({
               className={cn(
                 'relative min-w-[44px] min-h-[44px] w-11 h-11 sm:w-10 sm:h-10 flex-shrink-0 rounded-lg overflow-hidden touch-manipulation',
                 selectedItem.id === item.id
-                  ? 'ring-2 ring-amber-400 ring-offset-2 ring-offset-slate-900'
+                  ? 'ring-2 ring-brand-400 ring-offset-2 ring-offset-slate-900'
                   : 'opacity-80 hover:opacity-100'
               )}
               initial={{ scale: 0.9 }}

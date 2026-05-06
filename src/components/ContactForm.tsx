@@ -31,6 +31,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [requestType, setRequestType] = useState<string>('general')
   const [errorMsg, setErrorMsg] = useState('')
+  const [phoneValue, setPhoneValue] = useState('')
 
   const needsDateTime = requestType === 'meeting' || requestType === 'phone_call'
 
@@ -63,6 +64,7 @@ export function ContactForm() {
         setErrorMsg('')
         form.reset()
         setRequestType('general')
+        setPhoneValue('')
       } else {
         setStatus('error')
         setErrorMsg(data.error || 'Diçka shkoi keq.')
@@ -93,7 +95,19 @@ export function ContactForm() {
         <label htmlFor="phone" className="text-sm font-medium text-slate-700 dark:text-slate-300">
           Telefon
         </label>
-        <Input id="phone" name="phone" type="tel" placeholder="+383 44 000 000" />
+        <Input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          pattern="^\+?[0-9 ]{7,20}$"
+          placeholder="+383 44 000 000"
+          value={phoneValue}
+          onChange={(e) => {
+            const cleaned = e.target.value.replace(/[^\d+\s]/g, '')
+            setPhoneValue(cleaned)
+          }}
+        />
       </div>
       <div className="space-y-2">
         <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block">
@@ -111,7 +125,7 @@ export function ContactForm() {
                 value={value}
                 checked={requestType === value}
                 onChange={(e) => setRequestType(e.target.value)}
-                className="h-4 w-4 rounded-full border-slate-300 text-amber-600 focus:ring-amber-500"
+                className="h-4 w-4 rounded-full border-slate-300 text-brand-600 focus:ring-brand-500"
               />
               <span className="text-sm">{label}</span>
             </label>
@@ -119,7 +133,7 @@ export function ContactForm() {
         </div>
       </div>
       {needsDateTime && (
-        <div className="grid gap-4 sm:grid-cols-2 rounded-xl border border-amber-500/30 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-500/20 p-4">
+        <div className="grid gap-4 sm:grid-cols-2 rounded-xl border border-slate-100 bg-sky-50/70 dark:bg-brand-950/40 dark:border-brand-700/40 p-4">
           <div className="space-y-2">
             <label
               htmlFor="preferredDate"
@@ -147,7 +161,7 @@ export function ContactForm() {
               id="preferredTime"
               name="preferredTime"
               required={needsDateTime}
-              className="flex h-10 min-h-[44px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-base text-slate-900 dark:text-slate-100 shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-amber-500/50"
+              className="flex h-10 min-h-[44px] w-full rounded-lg border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-base text-slate-900 dark:text-slate-100 shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/50"
             >
               <option value="">Zgjidhni orën</option>
               {TIME_SLOTS.map((slot) => (

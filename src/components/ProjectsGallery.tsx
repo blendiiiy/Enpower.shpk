@@ -20,8 +20,8 @@ export function ProjectsGallery() {
     <>
       <ul className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-12 sm:mb-14">
         {highlights.map((item, i) => (
-          <li key={i} className="surface-card px-4 py-3 flex items-center gap-3 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-amber-500 shrink-0" />
+          <li key={i} className="surface-card-premium px-4 py-3 flex items-center gap-3 text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-brand-600 shrink-0" />
             {item}
           </li>
         ))}
@@ -54,7 +54,7 @@ export function ProjectsGallery() {
               <motion.div
                 key={item.id}
                 layoutId={`project-${item.id}`}
-                className="relative overflow-hidden rounded-xl cursor-pointer ring-1 ring-slate-200/50 dark:ring-slate-700/50 bg-slate-100 dark:bg-slate-800/40 p-2"
+                className="relative overflow-hidden rounded-xl cursor-pointer ring-1 ring-slate-200/70 dark:ring-slate-700/50 bg-white dark:bg-slate-900/35 p-2"
                 onClick={() => setSelectedItem(item)}
                 variants={{
                   hidden: { y: 24, opacity: 0 },
@@ -74,8 +74,8 @@ export function ProjectsGallery() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   fit="contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity" />
-                <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 opacity-0 hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/30 to-transparent opacity-100 transition-opacity" />
+                <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 opacity-100 transition-opacity">
                   <h3 className="text-white text-sm sm:text-base font-semibold line-clamp-1">
                     {item.title}
                   </h3>

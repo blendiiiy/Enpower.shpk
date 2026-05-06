@@ -18,11 +18,11 @@ export function BrandLogoBlock({ className }: BrandLogoBlockProps) {
       type="button"
       onClick={() => setExpanded((v) => !v)}
       className={cn(
-        'group w-full text-left rounded-2xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 focus-visible:ring-offset-2 cursor-pointer touch-manipulation',
+        'group w-full text-left rounded-2xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 focus-visible:ring-offset-2 cursor-pointer touch-manipulation',
         LOGO_FRAME_CLASS,
         'rounded-2xl',
         'flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 py-6 px-5 sm:px-8',
-        expanded && 'ring-2 ring-amber-500/40 shadow-lg shadow-amber-500/10',
+        expanded && 'ring-2 ring-brand-500/40 shadow-lg shadow-brand-600/15',
         className
       )}
       aria-pressed={expanded}

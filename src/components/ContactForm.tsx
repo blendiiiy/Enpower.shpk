@@ -186,9 +186,14 @@ export function ContactForm() {
         />
       </div>
       {status === 'done' && (
-        <p className="text-sm text-green-600 dark:text-green-400">
-          Mesazhi u dërgua. Do të ju kontaktojmë së shpejti.
-        </p>
+        <div
+          role="status"
+          aria-live="polite"
+          className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800 dark:border-green-800/60 dark:bg-green-950/35 dark:text-green-300"
+        >
+          <p className="font-semibold">Mesazhi u dërgua me sukses.</p>
+          <p className="mt-1">Faleminderit! Do t&apos;ju kontaktojmë së shpejti.</p>
+        </div>
       )}
       {status === 'error' && (
         <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>

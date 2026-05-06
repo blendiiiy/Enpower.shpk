@@ -41,7 +41,17 @@ export async function POST(request: Request) {
       console.log('[Contact] Rezultat: njoftim te ti =', notificationOk ? 'dërguar' : 'dështuar', '| konfirmim te klienti =', confirmationOk ? 'dërguar' : 'dështuar')
     }
 
-    return NextResponse.json({ success: true })
+    if (!notificationOk) {
+      return NextResponse.json(
+        { error: 'Mesazhi nuk u dorëzua. Ju lutem provoni përsëri pas pak.' },
+        { status: 502 }
+      )
+    }
+
+    return NextResponse.json({
+      success: true,
+      confirmationSent: confirmationOk,
+    })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
     console.error('Contact API error:', err)

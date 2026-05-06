@@ -4,7 +4,6 @@ import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { StructuredData } from '@/components/StructuredData'
-import { BackToTop } from '@/components/BackToTop'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -98,7 +97,6 @@ export default function RootLayout({
         <main id="main" className="flex-1 scroll-mt-20">{children}</main>
         <Footer />
         <WhatsAppButton />
-        <BackToTop />
       </body>
     </html>
   )

@@ -27,6 +27,28 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  const values = [
+    {
+      title: 'Siguri teknike',
+      description: 'Punime sipas standardeve teknike dhe kontroll i vazhdueshëm gjatë gjithë zbatimit.',
+    },
+    {
+      title: 'Cilësi në ekzekutim',
+      description: 'Materiale të certifikuara dhe dorëzim i punimeve me dokumentim të plotë.',
+    },
+    {
+      title: 'Përkushtim ndaj afateve',
+      description: 'Planifikim i qartë i fazave për realizim në kohë pa komprometuar standardin.',
+    },
+  ]
+
+  const capabilities = [
+    'Rrjete elektrike të tensionit të lartë dhe të mesëm (TL/TM)',
+    'Montim dhe mirëmbajtje e trafostacioneve',
+    'Ndriçim elektrik për infrastrukturë dhe ambiente industriale',
+    'Shërbime mirëmbajtjeje periodike dhe ndërhyrje teknike',
+  ]
+
   return (
     <article className="section-shell">
       <div className="section-container">
@@ -68,6 +90,61 @@ export default function AboutPage() {
             />
           </div>
         </div>
+
+        <section className="mt-16 sm:mt-20 rounded-2xl border border-slate-200/70 bg-white/80 p-6 sm:p-8 lg:p-10 shadow-card dark:border-slate-700/60 dark:bg-slate-900/40">
+          <p className="eyebrow">Çfarë na dallon</p>
+          <h2 className="section-title mt-2 text-2xl sm:text-3xl">Vlerat tona në çdo projekt</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {values.map((value) => (
+              <article
+                key={value.title}
+                className="rounded-xl border border-slate-200/70 bg-white p-5 dark:border-slate-700/60 dark:bg-slate-900/60"
+              >
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">{value.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{value.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200/70 bg-white/85 p-6 sm:p-8 shadow-card dark:border-slate-700/60 dark:bg-slate-900/40">
+            <p className="eyebrow">Ekspertizë</p>
+            <h2 className="section-title mt-2 text-2xl sm:text-3xl">Fushat kryesore të punës</h2>
+            <ul className="mt-5 space-y-3">
+              {capabilities.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
+                  <span className="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-brand-600" />
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200/70 bg-white/85 p-6 sm:p-8 shadow-card dark:border-slate-700/60 dark:bg-slate-900/40">
+            <p className="eyebrow">Procesi ynë</p>
+            <h2 className="section-title mt-2 text-2xl sm:text-3xl">Si punojmë me klientin</h2>
+            <div className="mt-6 space-y-4">
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">1. Analizë dhe planifikim</h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Vlerësojmë nevojat teknike dhe përgatisim plan realizimi të qartë.</p>
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">2. Zbatim në terren</h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Ekipi ynë realizon punimet sipas standardeve të sigurisë dhe cilësisë.</p>
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">3. Testim dhe dorëzim</h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Bëjmë verifikimet finale për funksionim të qëndrueshëm dhe afatgjatë.</p>
+              </div>
+            </div>
+            <div className="mt-8">
+              <Link href="/services" className="btn-secondary">
+                Shiko shërbimet
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </article>
   )

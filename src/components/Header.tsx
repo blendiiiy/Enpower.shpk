@@ -78,13 +78,18 @@ export function Header() {
         </div>
 
         {open && (
-          <nav className="md:hidden pb-4 flex flex-col gap-2">
+          <nav className="md:hidden pb-4 pt-2 flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white/95 shadow-sm">
             {nav.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-3 min-h-[44px] flex items-center text-slate-600 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-slate-800 touch-manipulation"
+                className={cn(
+                  'block rounded-xl px-4 py-3 min-h-[44px] flex items-center touch-manipulation',
+                  pathname === href
+                    ? 'bg-brand-700 text-white'
+                    : 'text-slate-800 hover:bg-brand-50 hover:text-brand-800'
+                )}
               >
                 {label}
               </Link>

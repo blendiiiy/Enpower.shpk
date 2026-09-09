@@ -32,6 +32,7 @@ export function ContactForm() {
   const [requestType, setRequestType] = useState<string>('general')
   const [errorMsg, setErrorMsg] = useState('')
   const [phoneValue, setPhoneValue] = useState('')
+  const [emailSent, setEmailSent] = useState(true)
 
   const needsDateTime = requestType === 'meeting' || requestType === 'phone_call'
 
@@ -41,6 +42,7 @@ export function ContactForm() {
     const formData = new FormData(form)
 
     setStatus('sending')
+    setErrorMsg('')
 
     try {
       const res = await fetch('/api/contact', {
@@ -60,8 +62,8 @@ export function ContactForm() {
       const data = await res.json()
 
       if (res.ok && data.success) {
+        setEmailSent(data.emailSent !== false)
         setStatus('done')
-        setErrorMsg('')
         form.reset()
         setRequestType('general')
         setPhoneValue('')
@@ -101,7 +103,7 @@ export function ContactForm() {
           type="tel"
           inputMode="tel"
           pattern="^\+?[0-9 ]{7,20}$"
-          placeholder="+383 44 000 000"
+          placeholder="+383 44 222 836"
           value={phoneValue}
           onChange={(e) => {
             const cleaned = e.target.value.replace(/[^\d+\s]/g, '')
@@ -192,7 +194,11 @@ export function ContactForm() {
           className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800 dark:border-green-800/60 dark:bg-green-950/35 dark:text-green-300"
         >
           <p className="font-semibold">Mesazhi u dërgua me sukses.</p>
-          <p className="mt-1">Faleminderit! Do t&apos;ju kontaktojmë së shpejti.</p>
+          <p className="mt-1">
+            {emailSent
+              ? 'Faleminderit! Do t\u2019ju kontaktojmë së shpejti.'
+              : 'Faleminderit! Kërkesa u ruajt dhe do t\u2019ju kontaktojmë së shpejti.'}
+          </p>
         </div>
       )}
       {status === 'error' && (

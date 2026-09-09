@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
+import { SITE } from '@/lib/site'
 
-const base = 'https://enpower-ks.com'
+const base = SITE.url
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

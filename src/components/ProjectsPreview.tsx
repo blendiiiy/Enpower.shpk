@@ -6,8 +6,8 @@ const FEATURED = galleryItems.slice(0, 2)
 
 export function ProjectsPreview() {
   return (
-    <section className="relative py-20 sm:py-24 lg:py-28 bg-white dark:bg-brand-950/50 bg-grid-pattern overflow-hidden border-y border-slate-100/80 dark:border-brand-900/40">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="page-band page-band--divider dark:bg-brand-950/76">
+      <div className="layout-container">
         <header className="max-w-3xl">
           <p className="eyebrow">Referenca</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">

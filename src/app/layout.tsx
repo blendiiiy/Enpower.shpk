@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { StructuredData } from '@/components/StructuredData'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
+import { SITE } from '@/lib/site'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
   ],
 }
 
-const siteUrl = 'https://enpower-ks.com'
+const siteUrl = SITE.url
 const defaultTitle = 'Enpower sh.p.k — Zgjidhje Profesionale në Energji Elektrike | Kosovë'
 const defaultDescription =
   'Kompani energjetike në Kosovë për rrjete elektrike TL/TM, trafostacione, ndriçim dhe mirëmbajtje. Projekte të sigurta dhe efikase për sektorin publik dhe privat.'
@@ -85,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sq" className={plusJakarta.variable}>
-      <body className="min-h-screen bg-page text-slate-900 dark:text-slate-100 font-sans antialiased subpixel-antialiased">
+      <body className="min-h-screen bg-page text-slate-900 dark:text-slate-100 font-sans antialiased subpixel-antialiased leading-relaxed text-[15px] sm:text-[15px]">
         <StructuredData />
         <a
           href="#main"

@@ -9,8 +9,9 @@ import { CTA } from '@/components/CTA'
 import { AnimatedSection } from '@/components/AnimatedSection'
 import { TrustPartnersStrip } from '@/components/TrustPartnersStrip'
 import { TestimonialsSection } from '@/components/TestimonialsSection'
+import { SITE } from '@/lib/site'
 
-const base = 'https://enpower-ks.com'
+const base = SITE.url
 export const metadata: Metadata = {
   title: 'Kryefaqja | Enpower sh.p.k',
   description:

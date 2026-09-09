@@ -20,7 +20,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-100 dark:border-brand-800/50 bg-white/95 dark:bg-brand-950/92 backdrop-blur-xl shadow-[0_1px_0_0_rgba(15,23,42,0.03)]">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="layout-container">
         <div className="flex h-16 sm:h-20 items-center justify-between">
           <Link
             href="/"
@@ -37,7 +37,7 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-2 lg:gap-3">
-            <div className="flex items-center gap-1 sm:gap-2 rounded-2xl border border-slate-100 dark:border-slate-700/70 bg-slate-50/50 dark:bg-slate-900/50 p-1 sm:p-1.5">
+            <div className="flex items-center gap-1 sm:gap-2 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-100/80 dark:bg-slate-900/50 p-1 sm:p-1.5">
             {nav.map(({ href, label }) => (
               <Link
                 key={href}
@@ -46,7 +46,7 @@ export function Header() {
                   'rounded-xl px-3 py-2 text-sm font-medium transition-all duration-200',
                   pathname === href
                     ? 'bg-brand-700 text-white shadow-sm dark:bg-brand-600 dark:text-white'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-brand-800 dark:hover:text-blue-300 hover:bg-white dark:hover:bg-slate-800/70'
+                    : 'text-slate-800 dark:text-slate-300 hover:text-brand-900 dark:hover:text-blue-300 hover:bg-white dark:hover:bg-slate-800/70'
                 )}
               >
                 {label}
@@ -78,17 +78,19 @@ export function Header() {
         </div>
 
         {open && (
-          <nav className="md:hidden pb-4 pt-2 flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white/95 shadow-sm">
+          <nav
+            className="md:hidden mt-2 mb-4 pb-4 pt-2 flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white px-2 shadow-xl dark:border-slate-600 dark:bg-slate-950 text-slate-900 dark:text-slate-50"
+          >
             {nav.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'block rounded-xl px-4 py-3 min-h-[44px] flex items-center touch-manipulation',
+                  'block rounded-xl px-4 py-3 min-h-[44px] flex items-center touch-manipulation font-medium',
                   pathname === href
-                    ? 'bg-brand-700 text-white'
-                    : 'text-slate-800 hover:bg-brand-50 hover:text-brand-800'
+                    ? 'bg-brand-700 text-white dark:bg-brand-600'
+                    : 'text-slate-900 dark:text-slate-50 hover:bg-brand-50 hover:text-brand-900 dark:hover:bg-brand-900/35 dark:hover:text-white'
                 )}
               >
                 {label}

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { LOGO_FRAME_CLASS, LOGO_SRC } from '@/lib/logo'
+import { SITE } from '@/lib/site'
 
 const links = [
   { href: '/', label: 'Kryefaqja' },
@@ -13,7 +14,7 @@ const links = [
 export function Footer() {
   return (
     <footer className="border-t border-slate-100 dark:border-brand-800/50 bg-white dark:bg-brand-950/92 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="layout-container py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <Link
@@ -50,28 +51,36 @@ export function Footer() {
           <div>
             <h3 className="text-xs font-semibold text-slate-900 dark:text-white uppercase tracking-[0.16em]">Kontakt</h3>
             <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
-              <li><span className="font-medium text-slate-700 dark:text-slate-300">Adresa:</span> Kline, Kosovë</li>
+              <li>
+                <span className="font-medium text-slate-700 dark:text-slate-300">Adresa:</span> {SITE.address}
+              </li>
               <li>
                 <span className="font-medium text-slate-700 dark:text-slate-300">Email:</span>{' '}
-                <a href="mailto:enpower@gmail.com" className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors">
-                  enpower@gmail.com
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
+                >
+                  {SITE.email}
                 </a>
               </li>
               <li>
                 <span className="font-medium text-slate-700 dark:text-slate-300">Telefon:</span>{' '}
-                <a href="tel:+38344222836" className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors">
-                  +383 44 222 836
+                <a
+                  href={`tel:${SITE.phoneE164}`}
+                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
+                >
+                  {SITE.phoneDisplay}
                 </a>
               </li>
               <li>
                 <span className="font-medium text-slate-700 dark:text-slate-300">Facebook:</span>{' '}
                 <a
-                  href="https://www.facebook.com/EnpowerShpk"
+                  href={SITE.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
                 >
-                  Enpower sh.p.k
+                  {SITE.facebookLabel}
                 </a>
               </li>
             </ul>

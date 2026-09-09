@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { sendContactNotification, sendContactConfirmationToClient } from '@/lib/email'
+import { getPool } from '@/lib/db'
 
 export async function POST(request: Request) {
   try {
@@ -23,6 +24,28 @@ export async function POST(request: Request) {
       preferredTime: preferredTime || null,
     }
 
+    const pool = getPool()
+    if (!pool) {
+      return NextResponse.json(
+        { error: 'Konfigurimi i databazës mungon. Kontrolloni .env.local dhe rinisni serverin.' },
+        { status: 503 }
+      )
+    }
+
+    await pool.execute(
+      `INSERT INTO contact_messages (name, email, phone, message, request_type, preferred_date, preferred_time)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        contactData.name,
+        contactData.email,
+        contactData.phone,
+        contactData.message,
+        contactData.requestType,
+        contactData.preferredDate,
+        contactData.preferredTime,
+      ]
+    )
+
     const hasResend = !!process.env.RESEND_API_KEY?.trim()
     const notifyTo = process.env.CONTACT_NOTIFY_EMAIL?.trim()
 
@@ -41,15 +64,9 @@ export async function POST(request: Request) {
       console.log('[Contact] Rezultat: njoftim te ti =', notificationOk ? 'dërguar' : 'dështuar', '| konfirmim te klienti =', confirmationOk ? 'dërguar' : 'dështuar')
     }
 
-    if (!notificationOk) {
-      return NextResponse.json(
-        { error: 'Mesazhi nuk u dorëzua. Ju lutem provoni përsëri pas pak.' },
-        { status: 502 }
-      )
-    }
-
     return NextResponse.json({
       success: true,
+      emailSent: notificationOk,
       confirmationSent: confirmationOk,
     })
   } catch (err) {

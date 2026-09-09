@@ -45,9 +45,9 @@ export function StatsSection() {
   ]
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-24 bg-white dark:bg-brand-950/80 bg-grid-pattern overflow-hidden border-y border-slate-100 dark:border-brand-900/40">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-14">
+    <section className="page-band page-band--tight page-band--divider dark:bg-brand-950/82">
+      <div className="layout-container">
+        <div className="section-intro !mb-12 sm:!mb-14">
           <p className="eyebrow">Rezultate & përvojë</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
             Numra që flasin

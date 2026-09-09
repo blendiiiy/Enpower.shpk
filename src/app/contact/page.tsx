@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { ContactForm } from '@/components/ContactForm'
+import { SITE } from '@/lib/site'
 
-const base = 'https://enpower-ks.com'
+const base = SITE.url
 export const metadata: Metadata = {
   title: 'Kontakti | Enpower sh.p.k',
   description:
@@ -24,16 +25,10 @@ export const metadata: Metadata = {
   },
 }
 
-const defaultContact = {
-  email: 'enpower@gmail.com',
-  phone: '+383 44 222 836',
-  address: 'Kline, Kosovë',
-}
-
 export default function ContactPage() {
-  const contactEmail = process.env.CONTACT_PAGE_EMAIL?.trim() || defaultContact.email
-  const contactPhone = process.env.CONTACT_PAGE_PHONE?.trim() || defaultContact.phone
-  const contactAddress = process.env.CONTACT_PAGE_ADDRESS?.trim() || defaultContact.address
+  const contactEmail = process.env.CONTACT_PAGE_EMAIL?.trim() || SITE.email
+  const contactPhone = process.env.CONTACT_PAGE_PHONE?.trim() || SITE.phoneDisplay
+  const contactAddress = process.env.CONTACT_PAGE_ADDRESS?.trim() || SITE.address
   const phoneTel = contactPhone.replace(/\s/g, '')
 
   return (
@@ -53,7 +48,7 @@ export default function ContactPage() {
           </p>
         </header>
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
-          <section className="rounded-2xl border border-slate-100 dark:border-slate-700/70 bg-white dark:bg-slate-900/80 backdrop-blur-sm p-8 sm:p-10 shadow-card">
+          <section className="surface-card p-8 sm:p-10">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Të dhënat e kontaktit
             </h2>
@@ -83,17 +78,17 @@ export default function ContactPage() {
               <li>
                 <span className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Facebook</span>
                 <a
-                  href="https://www.facebook.com/EnpowerShpk"
+                  href={SITE.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors underline underline-offset-2"
                 >
-                  Enpower sh.p.k
+                  {SITE.facebookLabel}
                 </a>
               </li>
             </ul>
           </section>
-          <section className="rounded-2xl border border-slate-100 dark:border-slate-700/70 bg-white dark:bg-slate-900/55 backdrop-blur-sm p-8 sm:p-10 shadow-card">
+          <section className="surface-card dark:bg-slate-900/55 p-8 sm:p-10">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Dërgoni një mesazh
             </h2>

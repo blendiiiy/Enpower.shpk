@@ -4,11 +4,12 @@ import { images } from '@/lib/images'
 
 export function AboutPreview() {
   return (
-    <section className="relative py-20 sm:py-24 lg:py-28 bg-white dark:bg-brand-950/80 bg-grid-pattern overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="page-band">
+      <div className="layout-container">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+            <p className="eyebrow">Kompania</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight mt-2">
               Rreth nesh
             </h2>
             <div className="section-title-accent-left" aria-hidden />

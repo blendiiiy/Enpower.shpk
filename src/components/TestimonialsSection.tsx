@@ -29,9 +29,9 @@ const ITEMS: Testimonial[] = [
 
 export function TestimonialsSection() {
   return (
-    <section className="section-shell !min-h-0">
-      <div className="section-container">
-        <header className="text-center section-header max-w-3xl mx-auto">
+    <section className="page-band page-band--divider">
+      <div className="layout-container pb-6">
+        <header className="section-intro">
           <p className="eyebrow">Referenca</p>
           <h2 className="section-title mt-2 text-3xl sm:text-4xl lg:text-5xl">Çfarë thonë klientët</h2>
           <p className="section-subtitle mx-auto mt-4">

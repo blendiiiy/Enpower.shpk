@@ -7,6 +7,10 @@
   --background: #ffffff;
   --accent: #2563eb;
   --brand-blue: #1e40af;
+  /* Harmonized vertical rhythm — all main sections */
+  --section-py: clamp(4rem, 7vw, 8rem);
+  --container-max: 72rem;
+  --radius-card: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,11 +66,16 @@ body {
   .card-hover {
     @apply transition-all duration-300 ease-out;
   }
+  .layout-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
   .section-shell {
-    @apply relative py-16 sm:py-20 lg:py-24 bg-grid-pattern min-h-screen bg-white dark:bg-brand-950;
+    @apply relative min-h-screen bg-grid-pattern bg-white dark:bg-brand-950;
+    @apply py-16 sm:py-20 lg:py-24 text-slate-900 dark:text-slate-100 leading-relaxed;
   }
   .section-container {
-    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply layout-container;
   }
   .section-header {
     @apply mb-12 sm:mb-14 lg:mb-16;
@@ -80,8 +89,32 @@ body {
   .eyebrow {
     @apply text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-brand-700 dark:text-blue-400;
   }
+
+  /* Standard section strip on homepage (aligned rhythm + typography). */
+  .page-band {
+    @apply relative overflow-hidden bg-white dark:bg-brand-950 bg-grid-pattern;
+    @apply py-20 sm:py-24 lg:py-[5.75rem];
+  }
+
+  .page-band--divider {
+    @apply border-y border-slate-100 dark:border-brand-900/40;
+  }
+
+  .page-band--tight {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /** Centered block title + eyebrow — use with max-width for consistency */
+  .section-intro {
+    @apply mb-14 sm:mb-16 max-w-3xl mx-auto text-center;
+  }
+
+  .section-intro-align-left {
+    @apply mx-0 max-w-none text-left;
+  }
+
   .surface-card {
-    @apply rounded-2xl border border-slate-100 dark:border-slate-700/60 bg-white dark:bg-slate-900/70 backdrop-blur-sm shadow-card;
+    @apply rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white dark:bg-slate-900/70 backdrop-blur-sm shadow-card;
   }
   .surface-card-premium {
     @apply surface-card transition-all duration-300;
@@ -95,7 +128,7 @@ body {
   }
   /* CTA kryesor: kaltër modern (jo mjaltë) */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-600/25 transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-600/25 transition-all duration-300;
     @apply hover:from-brand-500 hover:to-brand-600 hover:shadow-glow;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-brand-950;
   }
@@ -103,7 +136,7 @@ body {
     @apply px-8 py-4 text-base rounded-2xl;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-100 transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-100 transition-all duration-300;
     @apply hover:bg-sky-50/60 dark:hover:bg-slate-800 hover:border-brand-400/40 dark:hover:border-brand-500/45;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-brand-950;
   }
@@ -114,6 +147,10 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-marquee {
     animation: none !important;
   }

@@ -1,15 +1,12 @@
 # Enpower sh.p.k — Website
 
-Faqe moderne profesionale për **Enpower sh.p.k**, ndërtuar me Next.js 14, Tailwind CSS dhe e optimizuar për SEO.
+Faqe profesionale për **Enpower sh.p.k**, ndërtuar me Next.js 14, Tailwind CSS dhe e optimizuar për SEO.
 
 ## Teknologjitë
 
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **framer-motion**, **lucide-react**, **@radix-ui/react-slot**, **class-variance-authority**, **clsx**, **tailwind-merge**
+- **Next.js 14** (App Router) · **TypeScript** · **Tailwind CSS**
+- **framer-motion**, **lucide-react**, **Resend** (email), **mysql2** (mesazhet e kontaktit)
 - **SEO**: metadata, sitemap, robots, JSON-LD (Schema.org)
-- **UI**: `components/ui/` (Button, Input, Textarea), galeri projektesh me modal, formë kontakti
 
 ## Si të ekzekutosh
 
@@ -18,22 +15,13 @@ npm install
 npm run dev
 ```
 
-**Shënim:** Projekti përdor `framer-motion`, `lucide-react`, `@radix-ui/react-slot`, `class-variance-authority`, `clsx`, `tailwind-merge`. Ato instalohen me `npm install`. Nëse ndonjëra mungon, ekzekuto `npm install` përsëri.
+Hap [http://localhost:3000](http://localhost:3000).
 
-Hap [http://localhost:3000](http://localhost:3000) në shfletues.
+Kopjo `.env.example` → `.env.local` dhe plotëso vlerat (MySQL + Resend).
 
-**Nëse shfaqet ChunkLoadError (timeout):** ndaloni serverin (`Ctrl+C`), pastaj:
-```bash
-npm run dev:fresh
-```
-Ose: `rm -rf .next && npm run dev`. Më pas bëni **hard refresh** në shfletues (`Cmd+Shift+R` / `Ctrl+Shift+R`) ose hapni faqen në **privit** (incognito).
+**Nëse shfaqet ChunkLoadError:** `npm run dev:fresh` ose `rm -rf .next && npm run dev`, pastaj hard refresh.
 
-**Nëse shfaqet “Can't resolve next-flight-client-entry-loader” ose build dështon:** bëni instalim të pastër:
-```bash
-npm run clean
-npm run build
-```
-Ose manualisht: `rm -rf node_modules .next package-lock.json` → `npm install` → `npm run build`.
+**Nëse build dështon:** `npm run clean` pastaj `npm run build`.
 
 ## Build për prodhim
 
@@ -42,41 +30,51 @@ npm run build
 npm start
 ```
 
-## Struktura
+## Faqet
 
-- **Kryefaqja**: Hero, Pse Enpower?, Rreth nesh, Shërbimet, Projektet, Si punojmë, CTA
-- **Rreth nesh** (`/about`)
-- **Shërbimet** (`/services`): Rrjete TL & TM, Trafostacione, Ndriçim
-- **Projektet** (`/projects`)
-- **Kontakti** (`/contact`)
+- **/** — Hero, shërbime, projekte, dëshmi, CTA
+- **/about** — Rreth nesh
+- **/services** — TL/TM, trafostacione, ndriçim
+- **/projects** — Galeria e projekteve
+- **/contact** — Të dhënat + forma e kontaktit
+
+## Forma e kontaktit (MySQL + Resend)
+
+Forma në `/contact` bën dy gjëra:
+
+1. **Ruan** mesazhin në MySQL (`contact_messages`)
+2. **Dërgon** email njoftimi te ju (Resend) + opsionalisht konfirmim te klienti
+
+### Hapat
+
+1. Krijo databazën në MySQL / phpMyAdmin (p.sh. `En-power.shpk`)
+2. Vendos `MYSQL_*` në `.env.local`
+3. Krijo tabelën: `npm run db:init` (ose ekzekuto `database/schema.sql`)
+4. Hap llogari te [resend.com](https://resend.com), merre `RESEND_API_KEY`
+5. Vendos `CONTACT_NOTIFY_EMAIL` (emaili ku merr njoftimet) dhe opsionalisht `RESEND_FROM_EMAIL`
+6. Rinis `npm run dev` dhe testo formën
+
+Udhëzime për probleme me email: `docs/email-resend.md`.  
+Kontrollo konfigurimin: `GET /api/health`.
 
 ## Fotot
 
-- **Struktura**: `public/images/hero/`, `public/images/about/`, `public/images/projects/`.
-- **Konfigurimi**: Path-et janë në `src/lib/images.ts`. Tani përdoren placeholder-e nga placehold.co.
-- **Foto reale**: Vendosni skedarët (p.sh. `banner.jpg`, `about.jpg`, `1.jpg`, `2.jpg`) në ato foldera dhe përditësoni `images` në `src/lib/images.ts` me `/images/hero/banner.jpg` etj.
+- Foldera: `public/images/hero/`, `about/`, `projects/`, `logo/`
+- Path-et: `src/lib/images.ts` dhe `src/lib/logo.ts`
 
-## Forma e kontaktit
+## Të dhënat e kompanisë
 
-Forma në `/contact` dërgon mesazhe përmes **Formspree**. Për ta aktivizuar:
+Email, telefon, adresë, Facebook dhe URL e sajtit janë në **`src/lib/site.ts`**.  
+Ndrysho atje që Footer, kontakti, WhatsApp dhe SEO të mbeten të njëjta.
 
-1. Krijo një formë në [formspree.io](https://formspree.io) dhe merr Form ID.
-2. Shto në `.env.local`: `NEXT_PUBLIC_FORMSPREE_ID=xxx`
-3. Rindiz `npm run dev`. Forma do të dërgojë në Formspree.
+Për faqen `/contact` mund të mbivendosësh me env: `CONTACT_PAGE_EMAIL`, `CONTACT_PAGE_PHONE`, `CONTACT_PAGE_ADDRESS`.
 
-Pa këtë variabël, forma është e çaktivizuar dhe shfaqet një mesazh udhëzues.
+## Domeni / SEO
 
-## Ndryshime që mund të bësh
+Domeni aktual në kod: `https://enpower-ks.com` (`src/lib/site.ts`, `sitemap.ts`, `robots.ts`, metadata).
 
-1. **Fotot**: Shto imazhe në `public/images/` dhe përditëso `src/lib/images.ts`. Galeria përdor edhe `galleryItems` në të njëjtin skedar.
-2. **Kontakt**: Ndrysho email-in, telefonin dhe Facebook në `Footer`, `Contact` dhe `StructuredData`. Formspree: si më sipër.
-3. **Domeni**: Përditëso `metadataBase`, `sitemap.ts` dhe `robots.ts` me domenin real.
-
-## Keywords SEO (tashmë të përdorura)
+## Keywords SEO
 
 - kompani energjetike Kosovë
-- tension i mesëm Kosovë
-- tension i lartë Kosovë
-- trafostacione Kosovë
-- trafo private Kosovë
-- ndriçim elektrik Kosovë
+- tension i mesëm / i lartë Kosovë
+- trafostacione · trafo private · ndriçim elektrik Kosovë

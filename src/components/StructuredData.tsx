@@ -1,11 +1,13 @@
+import { SITE } from '@/lib/site'
+
 export function StructuredData() {
-  const siteUrl = 'https://enpower-ks.com'
+  const siteUrl = SITE.url
 
   const organization = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${siteUrl}/#organization`,
-    name: 'Enpower sh.p.k',
+    name: SITE.name,
     url: siteUrl,
     logo: {
       '@type': 'ImageObject',
@@ -16,7 +18,7 @@ export function StructuredData() {
     description:
       'Kompani energjetike në Kosovë. Tension i lartë, tension i mesëm, ndriçim elektrik, trafostacione. Projekte të sigurta dhe efikase për sektorin publik dhe privat.',
     foundingDate: '2020',
-    sameAs: ['https://www.facebook.com/EnpowerShpk'],
+    sameAs: [SITE.facebookUrl],
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Kline',
@@ -25,8 +27,8 @@ export function StructuredData() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'enpower@gmail.com',
-      telephone: '+38344222836',
+      email: SITE.email,
+      telephone: SITE.phoneE164,
       contactType: 'customer service',
       areaServed: 'XK',
       availableLanguage: 'Albanian',
@@ -38,7 +40,7 @@ export function StructuredData() {
     '@type': 'WebSite',
     '@id': `${siteUrl}/#website`,
     url: siteUrl,
-    name: 'Enpower sh.p.k',
+    name: SITE.name,
     description:
       'Zgjidhje profesionale në energji elektrike në Kosovë. Tension i lartë, tension i mesëm, ndriçim elektrik, trafostacione.',
     publisher: { '@id': `${siteUrl}/#organization` },
@@ -49,11 +51,11 @@ export function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': `${siteUrl}/#localbusiness`,
-    name: 'Enpower sh.p.k',
+    name: SITE.name,
     image: `${siteUrl}/opengraph-image`,
     url: siteUrl,
-    telephone: '+38344222836',
-    email: 'enpower@gmail.com',
+    telephone: SITE.phoneE164,
+    email: SITE.email,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Kline',

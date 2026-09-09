@@ -4,14 +4,20 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { ImageWithFallback } from './ImageWithFallback'
 import { images } from '@/lib/images'
+import { SITE } from '@/lib/site'
+
+/** Vendose NEXT_PUBLIC_SHOW_HERO_VIDEO=true kur keni `/public/videos/hero.mp4` — përndryshe shmang 404. */
+const WANT_VIDEO =
+  typeof process.env.NEXT_PUBLIC_SHOW_HERO_VIDEO === 'string' &&
+  process.env.NEXT_PUBLIC_SHOW_HERO_VIDEO.trim().toLowerCase() === 'true'
 
 export function Hero() {
-  const [videoOk, setVideoOk] = useState(true)
+  const [videoOk, setVideoOk] = useState(WANT_VIDEO)
 
   return (
     <section className="relative overflow-hidden min-h-[88vh] sm:min-h-[92vh] flex flex-col justify-center">
       <div className="absolute inset-0 z-0">
-        {videoOk ? (
+        {WANT_VIDEO && videoOk ? (
           <video
             className="absolute inset-0 h-full w-full object-cover scale-105"
             autoPlay
@@ -35,12 +41,12 @@ export function Hero() {
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-brand-950/90 via-brand-900/80 to-brand-950/95"
+          className="absolute inset-0 bg-gradient-to-b from-brand-950/90 via-brand-900/82 to-brand-950/96"
           aria-hidden
         />
       </div>
       <div className="relative z-10 gradient-mesh pt-28 sm:pt-32 pb-24 sm:pb-32 lg:pt-36 lg:pb-36">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="layout-container">
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-sky-200/95 mb-5">
               Enpower SHPK — kompani energjetike në Kosovë
@@ -55,27 +61,33 @@ export function Hero() {
               Tension i Lartë · Tension i Mesëm · Ndriçim Elektrik · Trafostacione
             </p>
             <p className="mt-6 text-base sm:text-lg text-slate-200/90 max-w-2xl mx-auto leading-relaxed">
-              Enpower sh.p.k ofron shërbime të avancuara energjetike në Kosovë, duke realizuar projekte të sigurta, efikase dhe të qëndrueshme për sektorin publik dhe privat.
+              Enpower sh.p.k ofron shërbime të avancuara energjetike në Kosovë, duke realizuar projekte të sigurta,
+              efikase dhe të qëndrueshme për sektorin publik dhe privat.
             </p>
             <div className="mt-11 flex flex-wrap justify-center gap-4 sm:gap-5">
-              <Link
-                href="/contact"
-                className="btn-primary btn-primary-lg group shadow-lg"
-              >
+              <Link href="/contact" className="btn-primary btn-primary-lg group shadow-lg">
                 Kërko ofertë
-                <svg className="h-5 w-5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  className="h-5 w-5 group-hover:translate-x-0.5 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
               <a
-                href="tel:+38344222836"
+                href={`tel:${SITE.phoneE164}`}
                 className="btn-secondary btn-primary-lg border-white/45 bg-white/10 text-white hover:bg-white/15 hover:border-white/65 focus-visible:ring-white/60 focus-visible:ring-offset-slate-900"
               >
                 Telefono tani
               </a>
             </div>
             <p className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs sm:text-sm text-slate-300/85 tracking-wide">
-              <Link href="/services" className="font-semibold text-sky-200 underline-offset-4 hover:text-white hover:underline">
+              <Link
+                href="/services"
+                className="font-semibold text-sky-200 underline-offset-4 hover:text-white hover:underline"
+              >
                 Të gjitha shërbimet
               </Link>
               <span className="hidden sm:inline text-white/35" aria-hidden>

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Cable, Lightbulb, TowerControl } from 'lucide-react'
+import { SITE } from '@/lib/site'
 
-const base = 'https://enpower-ks.com'
+const base = SITE.url
 export const metadata: Metadata = {
   title: 'Shërbimet tona | Enpower sh.p.k',
   description:

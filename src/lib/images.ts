@@ -1,6 +1,6 @@
 /**
- * Path-et e fotove. Përdorni /images/... kur keni fotot reale në public/images/.
- * Tani përdoren placeholder-e nga placehold.co.
+ * Path-et e fotove në public/images/.
+ * Ndryshoni këtu kur shtoni ose riemëroni skedarë.
  */
 export const images = {
   hero: '/images/hero/background.png',

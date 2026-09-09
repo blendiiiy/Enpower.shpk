@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ProjectsGallery } from '@/components/ProjectsGallery'
 import { galleryItems } from '@/lib/images'
+import { SITE } from '@/lib/site'
 
-const base = 'https://enpower-ks.com'
+const base = SITE.url
 export const metadata: Metadata = {
   title: 'Projektet tona | Enpower sh.p.k',
   description:

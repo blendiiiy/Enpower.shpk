@@ -24,36 +24,46 @@ export async function POST(request: Request) {
       preferredTime: preferredTime || null,
     }
 
+    let savedToDb = false
     const pool = getPool()
-    if (!pool) {
-      return NextResponse.json(
-        { error: 'Konfigurimi i databazës mungon. Kontrolloni .env.local dhe rinisni serverin.' },
-        { status: 503 }
-      )
+    if (pool) {
+      try {
+        await pool.execute(
+          `INSERT INTO contact_messages (name, email, phone, message, request_type, preferred_date, preferred_time)
+           VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [
+            contactData.name,
+            contactData.email,
+            contactData.phone,
+            contactData.message,
+            contactData.requestType,
+            contactData.preferredDate,
+            contactData.preferredTime,
+          ]
+        )
+        savedToDb = true
+      } catch (dbErr) {
+        console.error('[Contact] MySQL insert failed:', dbErr)
+      }
+    } else if (process.env.NODE_ENV === 'development') {
+      console.warn('[Contact] MySQL nuk është konfiguruar — vazhdojmë me email nëse Resend është aktiv.')
     }
-
-    await pool.execute(
-      `INSERT INTO contact_messages (name, email, phone, message, request_type, preferred_date, preferred_time)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [
-        contactData.name,
-        contactData.email,
-        contactData.phone,
-        contactData.message,
-        contactData.requestType,
-        contactData.preferredDate,
-        contactData.preferredTime,
-      ]
-    )
 
     const hasResend = !!process.env.RESEND_API_KEY?.trim()
     const notifyTo = process.env.CONTACT_NOTIFY_EMAIL?.trim()
 
     if (process.env.NODE_ENV === 'development') {
       if (!hasResend || !notifyTo) {
-        console.warn('[Contact] Email nuk u dërgua: vendos RESEND_API_KEY dhe CONTACT_NOTIFY_EMAIL në .env.local dhe rinisni serverin.')
+        console.warn(
+          '[Contact] Email nuk u dërgua: vendos RESEND_API_KEY dhe CONTACT_NOTIFY_EMAIL në .env.local dhe rinisni serverin.'
+        )
       } else {
-        console.log('[Contact] Njoftim do të dërgohet te:', notifyTo, '| Konfirmim te klienti:', contactData.email)
+        console.log(
+          '[Contact] Njoftim do të dërgohet te:',
+          notifyTo,
+          '| Konfirmim te klienti:',
+          contactData.email
+        )
       }
     }
 
@@ -61,13 +71,32 @@ export async function POST(request: Request) {
     const confirmationOk = await sendContactConfirmationToClient(contactData)
 
     if (process.env.NODE_ENV === 'development' && hasResend) {
-      console.log('[Contact] Rezultat: njoftim te ti =', notificationOk ? 'dërguar' : 'dështuar', '| konfirmim te klienti =', confirmationOk ? 'dërguar' : 'dështuar')
+      console.log(
+        '[Contact] Rezultat: njoftim te ti =',
+        notificationOk ? 'dërguar' : 'dështuar',
+        '| konfirmim te klienti =',
+        confirmationOk ? 'dërguar' : 'dështuar',
+        '| db =',
+        savedToDb ? 'ruajtur' : 'jo'
+      )
+    }
+
+    // Sukses nëse u ruajt OSE u dërgua email — përndryshe s’ka ku të shkojë mesazhi
+    if (!savedToDb && !notificationOk) {
+      return NextResponse.json(
+        {
+          error:
+            'Mesazhi nuk u dorëzua. Kontrolloni MySQL / Resend (RESEND_API_KEY, CONTACT_NOTIFY_EMAIL) dhe provoni përsëri.',
+        },
+        { status: 503 }
+      )
     }
 
     return NextResponse.json({
       success: true,
       emailSent: notificationOk,
       confirmationSent: confirmationOk,
+      savedToDb,
     })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
@@ -75,7 +104,9 @@ export async function POST(request: Request) {
     const isDev = process.env.NODE_ENV === 'development'
     return NextResponse.json(
       {
-        error: isDev ? `Gabim: ${message}. (Kontrollo konfigurimin e email-it në .env.local)` : 'Diçka shkoi keq. Provoni përsëri.',
+        error: isDev
+          ? `Gabim: ${message}. (Kontrollo konfigurimin e email-it / DB në .env.local)`
+          : 'Diçka shkoi keq. Provoni përsëri.',
       },
       { status: 500 }
     )

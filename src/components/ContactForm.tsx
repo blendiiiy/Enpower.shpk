@@ -197,7 +197,7 @@ export function ContactForm() {
           <p className="mt-1">
             {emailSent
               ? 'Faleminderit! Do t\u2019ju kontaktojmë së shpejti.'
-              : 'Faleminderit! Kërkesa u ruajt dhe do t\u2019ju kontaktojmë së shpejti.'}
+              : 'Faleminderit! Kërkesa u pranua dhe do t\u2019ju kontaktojmë së shpejti.'}
           </p>
         </div>
       )}

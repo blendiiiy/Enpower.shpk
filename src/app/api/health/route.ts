@@ -2,12 +2,9 @@ import { NextResponse } from 'next/server'
 import { getPool } from '@/lib/db'
 
 export async function GET() {
-  const missing: string[] = []
-  if (!process.env.MYSQL_USER?.trim()) missing.push('MYSQL_USER')
-  if (!process.env.MYSQL_PASSWORD) missing.push('MYSQL_PASSWORD')
-  if (!process.env.MYSQL_DATABASE?.trim()) missing.push('MYSQL_DATABASE')
-  if (!process.env.RESEND_API_KEY?.trim()) missing.push('RESEND_API_KEY')
-  if (!process.env.CONTACT_NOTIFY_EMAIL?.trim()) missing.push('CONTACT_NOTIFY_EMAIL')
+  const missingEmail: string[] = []
+  if (!process.env.RESEND_API_KEY?.trim()) missingEmail.push('RESEND_API_KEY')
+  if (!process.env.CONTACT_NOTIFY_EMAIL?.trim()) missingEmail.push('CONTACT_NOTIFY_EMAIL')
 
   const pool = getPool()
   let dbOk = false
@@ -22,14 +19,17 @@ export async function GET() {
     }
   }
 
-  if (missing.length > 0 || !dbOk) {
+  const emailOk = missingEmail.length === 0
+  const ok = dbOk || emailOk
+
+  if (!ok) {
     return NextResponse.json(
       {
         ok: false,
-        error: missing.length > 0 ? 'Mungojnë variablat e mjedisit' : 'MySQL nuk përgjigjet',
-        missing: missing.length > 0 ? missing : undefined,
+        error: 'As MySQL as Resend nuk janë gati',
+        missing: missingEmail.length ? missingEmail : undefined,
         database: dbOk ? 'connected' : 'unavailable',
-        hint: 'Kontrollo .env.local, MySQL, dhe rinisni serverin (npm run dev). Shih database/README.md.',
+        hint: 'Vendos RESEND_API_KEY + CONTACT_NOTIFY_EMAIL, ose ndez MySQL (XAMPP) dhe MYSQL_* në .env.local.',
       },
       { status: 503 }
     )
@@ -37,11 +37,11 @@ export async function GET() {
 
   return NextResponse.json({
     ok: true,
-    message: 'Forma e kontaktit është gati (MySQL + Resend).',
+    message: 'Forma e kontaktit është gati.',
     config: {
-      database: 'connected',
-      emailProvider: 'Resend',
-      notifyTo: process.env.CONTACT_NOTIFY_EMAIL,
+      database: dbOk ? 'connected' : 'optional/unavailable',
+      emailProvider: emailOk ? 'Resend' : 'not configured',
+      notifyTo: process.env.CONTACT_NOTIFY_EMAIL || null,
     },
   })
 }

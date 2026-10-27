@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Outfit, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -10,6 +10,12 @@ import { SITE } from '@/lib/site'
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-plus-jakarta',
+  display: 'swap',
+})
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
   display: 'swap',
 })
 
@@ -85,8 +91,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="sq" className={plusJakarta.variable}>
-      <body className="min-h-screen bg-page text-slate-900 dark:text-slate-100 font-sans antialiased subpixel-antialiased leading-relaxed text-[15px] sm:text-[15px]">
+    <html lang="sq" className={`${plusJakarta.variable} ${outfit.variable}`}>
+      <body className="min-h-screen bg-page text-brand-900 dark:text-slate-100 font-sans antialiased leading-relaxed text-[15.5px]">
         <StructuredData />
         <a
           href="#main"

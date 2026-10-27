@@ -88,7 +88,7 @@ export default function ContactPage() {
               </li>
             </ul>
           </section>
-          <section className="surface-card dark:bg-slate-900/55 p-8 sm:p-10">
+          <section className="surface-card p-8 sm:p-10">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
               Dërgoni një mesazh
             </h2>

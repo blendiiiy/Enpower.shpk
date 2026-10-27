@@ -8,28 +8,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /** Ngjyra kryesore të markës: kaltër i thellë + amber (si logo) */
+        /** Markë: navy i thellë + electric blue (jo purple) */
         brand: {
-          950: '#0a0f1c',
-          900: '#0f172a',
-          850: '#111c33',
-          800: '#172554',
-          700: '#1e3a8a',
+          950: '#070b14',
+          900: '#0c1424',
+          850: '#111c30',
+          800: '#162544',
+          700: '#1e3a6e',
           600: '#1d4ed8',
           500: '#2563eb',
           400: '#3b82f6',
+          300: '#93c5fd',
         },
         primary: {
-          50: '#fefce8',
-          100: '#fef9c3',
-          200: '#fef08a',
-          300: '#fde047',
-          400: '#facc15',
-          500: '#eab308',
-          600: '#ca8a04',
-          700: '#a16207',
-          800: '#854d0e',
-          900: '#713f12',
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#0f172a',
         },
         accent: {
           400: '#38bdf8',
@@ -44,17 +45,22 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-plus-jakarta)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-outfit)', 'var(--font-plus-jakarta)', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        tighter: '-0.03em',
+        tight: '-0.02em',
       },
       boxShadow: {
-        'glow': '0 0 48px -10px rgba(37, 99, 235, 0.35)',
-        'glow-lg': '0 0 64px -12px rgba(29, 78, 216, 0.28)',
-        'card': '0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.03)',
-        'card-hover':
-          '0 20px 40px -12px rgba(30, 58, 138, 0.12), 0 8px 16px -8px rgba(15, 23, 42, 0.06)',
+        soft: '0 1px 2px rgba(15, 23, 42, 0.04)',
+        lift: '0 18px 40px -24px rgba(15, 23, 42, 0.28)',
+        card: '0 1px 2px rgba(15, 23, 42, 0.04)',
+        'card-hover': '0 22px 44px -28px rgba(15, 23, 42, 0.35)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-up': 'slideUp 0.6s ease-out',
+        'fade-in': 'fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+        'slide-up': 'slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+        'hero-ken': 'heroKen 22s ease-out forwards',
         marquee: 'marquee 48s linear infinite',
       },
       keyframes: {
@@ -63,8 +69,12 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(18px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        heroKen: {
+          '0%': { transform: 'scale(1.08)' },
+          '100%': { transform: 'scale(1)' },
         },
         marquee: {
           '0%': { transform: 'translateX(0)' },

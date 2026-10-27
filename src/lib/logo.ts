@@ -1,5 +1,8 @@
-/** Logo origjinale — mos e zëvendëso me versione të përpunuara; ngjyrat mbeten si në skedar. */
+/** Logo për sfond të çelët (header light). */
 export const LOGO_SRC = '/images/logo/enpower-logo-transparent.png'
+
+/** Logo e bardhë/kaltër — duket mirë mbi navy / dark. */
+export const LOGO_SRC_ON_DARK = '/images/logo/enpower-logo-blue-white.png'
 
 /** Wrapper minimal: pa kornizë/katror, vetëm hover/focus. */
 export const LOGO_FRAME_CLASS =

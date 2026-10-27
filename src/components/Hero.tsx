@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ImageWithFallback } from './ImageWithFallback'
 import { images } from '@/lib/images'
 import { SITE } from '@/lib/site'
@@ -13,13 +14,14 @@ const WANT_VIDEO =
 
 export function Hero() {
   const [videoOk, setVideoOk] = useState(WANT_VIDEO)
+  const reducedMotion = useReducedMotion()
 
   return (
-    <section className="relative overflow-hidden min-h-[88vh] sm:min-h-[92vh] flex flex-col justify-center">
+    <section className="relative overflow-hidden min-h-[92vh] sm:min-h-screen flex flex-col justify-end sm:justify-center">
       <div className="absolute inset-0 z-0">
         {WANT_VIDEO && videoOk ? (
           <video
-            className="absolute inset-0 h-full w-full object-cover scale-105"
+            className="absolute inset-0 h-full w-full object-cover"
             autoPlay
             muted
             loop
@@ -37,38 +39,37 @@ export function Hero() {
             fill
             sizes="100vw"
             priority
-            className="object-cover scale-105"
+            className={`object-cover ${reducedMotion ? '' : 'animate-hero-ken'}`}
           />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-brand-950/90 via-brand-900/82 to-brand-950/96"
+          className="absolute inset-0 bg-gradient-to-b from-brand-950/55 via-brand-950/70 to-brand-950/95"
           aria-hidden
         />
       </div>
-      <div className="relative z-10 gradient-mesh pt-28 sm:pt-32 pb-24 sm:pb-32 lg:pt-36 lg:pb-36">
+
+      <div className="relative z-10 gradient-mesh pt-28 pb-20 sm:pt-32 sm:pb-28 lg:pt-36 lg:pb-32">
         <div className="layout-container">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-sky-200/95 mb-5">
-              Enpower SHPK — kompani energjetike në Kosovë
+          <motion.div
+            className="mx-auto max-w-3xl text-center"
+            initial={reducedMotion ? false : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-display text-sm sm:text-base font-semibold tracking-[0.28em] uppercase text-white">
+              Enpower
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.03] text-white drop-shadow-md">
-              Zgjidhje Profesionale në{' '}
-              <span className="bg-gradient-to-r from-sky-200 via-white to-sky-100 bg-clip-text text-transparent">
-                Energji Elektrike
-              </span>
+            <h1 className="mt-5 font-display text-[2.6rem] sm:text-5xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-white text-balance">
+              Energji elektrike me standard profesional
             </h1>
-            <p className="mt-5 text-base sm:text-lg text-slate-200/95 font-medium">
-              Tension i Lartë · Tension i Mesëm · Ndriçim Elektrik · Trafostacione
+            <p className="mt-6 text-base sm:text-lg text-slate-200/90 max-w-xl mx-auto leading-relaxed">
+              Rrjete TL/TM, trafostacione dhe ndriçim — projekte të sigurta për sektorin publik dhe privat në Kosovë.
             </p>
-            <p className="mt-6 text-base sm:text-lg text-slate-200/90 max-w-2xl mx-auto leading-relaxed">
-              Enpower sh.p.k ofron shërbime të avancuara energjetike në Kosovë, duke realizuar projekte të sigurta,
-              efikase dhe të qëndrueshme për sektorin publik dhe privat.
-            </p>
-            <div className="mt-11 flex flex-wrap justify-center gap-4 sm:gap-5">
-              <Link href="/contact" className="btn-primary btn-primary-lg group shadow-lg">
+            <div className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
+              <Link href="/contact" className="btn-primary btn-primary-lg group">
                 Kërko ofertë
                 <svg
-                  className="h-5 w-5 group-hover:translate-x-0.5 transition-transform"
+                  className="h-5 w-5 transition-transform group-hover:translate-x-0.5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -78,24 +79,12 @@ export function Hero() {
               </Link>
               <a
                 href={`tel:${SITE.phoneE164}`}
-                className="btn-secondary btn-primary-lg border-white/45 bg-white/10 text-white hover:bg-white/15 hover:border-white/65 focus-visible:ring-white/60 focus-visible:ring-offset-slate-900"
+                className="btn-secondary btn-primary-lg border-white/25 bg-white/10 text-white hover:bg-white/15 hover:border-white/45"
               >
                 Telefono tani
               </a>
             </div>
-            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs sm:text-sm text-slate-300/85 tracking-wide">
-              <Link
-                href="/services"
-                className="font-semibold text-sky-200 underline-offset-4 hover:text-white hover:underline"
-              >
-                Të gjitha shërbimet
-              </Link>
-              <span className="hidden sm:inline text-white/35" aria-hidden>
-                ·
-              </span>
-              <span>Ofertë e personalizuar për projektin tuaj.</span>
-            </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

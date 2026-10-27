@@ -20,9 +20,8 @@ function CountUp({ target, suffix = '', durationMs = 1200 }: { target: number; s
 
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / durationMs)
-      const eased = 1 - Math.pow(1 - t, 3) // easeOutCubic
-      const next = Math.round(target * eased)
-      setValue(next)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setValue(Math.round(target * eased))
       if (t < 1) requestAnimationFrame(tick)
     }
 
@@ -45,37 +44,26 @@ export function StatsSection() {
   ]
 
   return (
-    <section className="page-band page-band--tight page-band--divider dark:bg-brand-950/82">
+    <section className="page-band page-band--tight bg-brand-950 text-white">
       <div className="layout-container">
-        <div className="section-intro !mb-12 sm:!mb-14">
-          <p className="eyebrow">Rezultate & përvojë</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Numra që flasin
-          </h2>
-          <div className="section-title-accent mx-auto mt-4" aria-hidden />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {stats.map((s) => (
-            <motion.article
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6">
+          {stats.map((s, i) => (
+            <motion.div
               key={s.label}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-20% 0px' }}
-              transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
-              className="surface-card-premium p-6 sm:p-7 text-center"
+              viewport={{ once: true, margin: '-15% 0px' }}
+              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center sm:border-l sm:first:border-l-0 sm:border-white/10 sm:px-6"
             >
-              <div className="text-4xl sm:text-5xl font-extrabold text-brand-700 dark:text-blue-400">
+              <div className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-white">
                 <CountUp target={s.value} suffix={s.suffix} />
               </div>
-              <p className="mt-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-300">
-                {s.label}
-              </p>
-            </motion.article>
+              <p className="mt-2 text-sm font-medium tracking-wide text-slate-300">{s.label}</p>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   )
 }
-

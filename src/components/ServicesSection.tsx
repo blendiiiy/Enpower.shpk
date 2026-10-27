@@ -2,75 +2,58 @@ import Link from 'next/link'
 
 const services = [
   {
+    num: '01',
     title: 'Rrjete Elektrike TL & TM',
     summary: 'Projektim, instalim dhe rehabilitim i rrjeteve për furnizim stabil.',
-    items: [
-      'Ndërtim dhe rehabilitim i linjave të tensionit të lartë dhe të mesëm',
-      'Instalime elektrike industriale',
-      'Testim dhe mirëmbajtje',
-    ],
   },
   {
+    num: '02',
     title: 'Trafostacione & Trafo Private',
     summary: 'Zgjidhje të plota për biznese, industri dhe objekte publike.',
-    items: [
-      'Ndërtim i trafostacioneve të reja',
-      'Montim i trafove private për biznese dhe industri',
-      'Modernizim dhe servis teknik',
-    ],
   },
   {
+    num: '03',
     title: 'Ndriçim Elektrik',
     summary: 'Sisteme moderne ndriçimi me fokus në efikasitet energjetik.',
-    items: [
-      'Ndriçim publik (rrugë, sheshe, zona urbane)',
-      'Ndriçim industrial dhe komercial',
-      'Zgjidhje moderne dhe efikase energjetike',
-    ],
   },
 ]
 
 export function ServicesSection() {
   return (
-    <section className="page-band page-band--divider dark:bg-brand-950/80">
+    <section className="page-band page-band--muted">
       <div className="layout-container">
         <div className="section-intro">
-          <p className="eyebrow">Shërbimet kryesore</p>
-          <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+          <p className="eyebrow">Shërbimet</p>
+          <h2 className="display-title mt-3 text-3xl sm:text-4xl lg:text-5xl text-brand-900 dark:text-white">
             Çfarë ofrojmë
           </h2>
-          <div className="section-title-accent mx-auto mt-4" aria-hidden />
+          <div className="section-title-accent" aria-hidden />
           <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            Rrjete TL/TM, trafostacione, ndriçim dhe mirëmbajtje — zgjidhje të plota energjetike për sektorin publik dhe privat, nga një burim i vetëm.
+            Zgjidhje të plota energjetike — nga një burim i vetëm profesional.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map(({ title, summary, items: list }, i) => (
+        <div className="divide-y divide-slate-200/80 dark:divide-white/10 border-y border-slate-200/80 dark:border-white/10">
+          {services.map(({ num, title, summary }) => (
             <div
-              key={i}
-              className="surface-card-premium p-6 sm:p-8"
+              key={num}
+              className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-baseline py-8 sm:py-10 sm:gap-10"
             >
-              <div className="h-1 w-14 rounded-full bg-gradient-to-r from-brand-600 to-brand-700 mb-6" aria-hidden />
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                {title}
-              </h3>
-              <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{summary}</p>
-              <ul className="mt-5 space-y-2.5">
-                {list.map((item, j) => (
-                  <li key={j} className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600/70" aria-hidden />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <span className="font-display text-sm font-semibold tracking-[0.2em] text-brand-500">
+                {num}
+              </span>
+              <div>
+                <h3 className="font-display text-xl sm:text-2xl font-semibold text-brand-900 dark:text-white">
+                  {title}
+                </h3>
+                <p className="mt-2 max-w-2xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                  {summary}
+                </p>
+              </div>
             </div>
           ))}
         </div>
-        <div className="mt-14 text-center">
-          <Link
-            href="/services"
-            className="btn-primary"
-          >
+        <div className="mt-12 text-center">
+          <Link href="/services" className="btn-primary">
             Të gjitha shërbimet
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

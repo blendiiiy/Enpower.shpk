@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { LOGO_FRAME_CLASS, LOGO_SRC } from '@/lib/logo'
+import { BrandLogo } from '@/components/BrandLogo'
 import { SITE } from '@/lib/site'
 
 const links = [
@@ -13,35 +12,23 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-100 dark:border-brand-800/50 bg-white dark:bg-brand-950/92 backdrop-blur-sm">
-      <div className="layout-container py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <footer className="border-t border-white/5 bg-brand-950 text-slate-300">
+      <div className="layout-container py-14 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <Link
-              href="/"
-              className={`inline-flex items-center ${LOGO_FRAME_CLASS}`}
-            >
-              <Image
-                src={LOGO_SRC}
-                alt="Enpower sh.p.k"
-                width={260}
-                height={78}
-                className="h-12 sm:h-14 w-auto object-contain drop-shadow-sm"
-              />
+            <Link href="/" className="inline-flex items-center">
+              <BrandLogo variant="dark" imgClassName="h-12 sm:h-14 w-auto object-contain" />
             </Link>
-            <p className="mt-4 text-sm text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
-              Zgjidhje profesionale në energji elektrike në Kosovë. Tension i lartë, tension i mesëm, ndriçim elektrik dhe trafostacione.
+            <p className="mt-5 text-sm text-slate-400 max-w-sm leading-relaxed">
+              Zgjidhje profesionale në energji elektrike në Kosovë. TL, TM, ndriçim dhe trafostacione.
             </p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-slate-900 dark:text-white uppercase tracking-[0.16em]">Lidhje</h3>
-            <ul className="mt-4 space-y-2">
+            <h3 className="text-[11px] font-semibold text-white uppercase tracking-[0.2em]">Lidhje</h3>
+            <ul className="mt-4 space-y-2.5">
               {links.map(({ href, label }) => (
                 <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
-                  >
+                  <Link href={href} className="text-sm text-slate-400 hover:text-white transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -49,36 +36,25 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-slate-900 dark:text-white uppercase tracking-[0.16em]">Kontakt</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+            <h3 className="text-[11px] font-semibold text-white uppercase tracking-[0.2em]">Kontakt</h3>
+            <ul className="mt-4 space-y-3 text-sm text-slate-400">
+              <li>{SITE.address}</li>
               <li>
-                <span className="font-medium text-slate-700 dark:text-slate-300">Adresa:</span> {SITE.address}
-              </li>
-              <li>
-                <span className="font-medium text-slate-700 dark:text-slate-300">Email:</span>{' '}
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
-                >
+                <a href={`mailto:${SITE.email}`} className="hover:text-white transition-colors">
                   {SITE.email}
                 </a>
               </li>
               <li>
-                <span className="font-medium text-slate-700 dark:text-slate-300">Telefon:</span>{' '}
-                <a
-                  href={`tel:${SITE.phoneE164}`}
-                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
-                >
+                <a href={`tel:${SITE.phoneE164}`} className="hover:text-white transition-colors">
                   {SITE.phoneDisplay}
                 </a>
               </li>
               <li>
-                <span className="font-medium text-slate-700 dark:text-slate-300">Facebook:</span>{' '}
                 <a
                   href={SITE.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-brand-700 dark:hover:text-blue-400 transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   {SITE.facebookLabel}
                 </a>
@@ -86,8 +62,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-slate-100 dark:border-brand-900/60 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="mt-12 pt-8 border-t border-white/5">
+          <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} Enpower sh.p.k. Të gjitha të drejtat e rezervuara.
           </p>
         </div>

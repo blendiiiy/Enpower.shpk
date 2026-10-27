@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { SITE, whatsappHref } from '@/lib/site'
 
 const REQUEST_TYPES = [
   { value: 'general', label: 'Vetëm mesazh' },
@@ -21,10 +22,41 @@ const TIME_SLOTS = [
   '16:00 - 17:00',
 ]
 
+const TYPE_LABEL: Record<string, string> = {
+  general: 'Vetëm mesazh',
+  meeting: 'Takim në zyrë',
+  phone_call: 'Telefonatë',
+}
+
 function getMinDate() {
   const d = new Date()
   d.setDate(d.getDate() + 1)
   return d.toISOString().split('T')[0]
+}
+
+function buildWhatsAppText(data: {
+  name: string
+  email: string
+  phone: string
+  message: string
+  requestType: string
+  preferredDate: string
+  preferredTime: string
+}) {
+  const lines = [
+    `Ofertë / kontakt nga website — ${SITE.name}`,
+    ``,
+    `Emri: ${data.name}`,
+    `Email: ${data.email}`,
+    data.phone ? `Telefon: ${data.phone}` : null,
+    `Lloji: ${TYPE_LABEL[data.requestType] ?? data.requestType}`,
+    data.preferredDate ? `Data: ${data.preferredDate}` : null,
+    data.preferredTime ? `Ora: ${data.preferredTime}` : null,
+    ``,
+    `Mesazhi:`,
+    data.message,
+  ]
+  return lines.filter(Boolean).join('\n')
 }
 
 export function ContactForm() {
@@ -32,7 +64,6 @@ export function ContactForm() {
   const [requestType, setRequestType] = useState<string>('general')
   const [errorMsg, setErrorMsg] = useState('')
   const [phoneValue, setPhoneValue] = useState('')
-  const [emailSent, setEmailSent] = useState(true)
 
   const needsDateTime = requestType === 'meeting' || requestType === 'phone_call'
 
@@ -41,40 +72,51 @@ export function ContactForm() {
     const form = e.currentTarget
     const formData = new FormData(form)
 
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      phone: String(formData.get('phone') || '').trim(),
+      message: String(formData.get('message') || '').trim(),
+      requestType: String(formData.get('requestType') || 'general'),
+      preferredDate: needsDateTime ? String(formData.get('preferredDate') || '') : '',
+      preferredTime: needsDateTime ? String(formData.get('preferredTime') || '') : '',
+    }
+
+    if (!payload.name || !payload.email || !payload.message) {
+      setStatus('error')
+      setErrorMsg('Emri, email dhe mesazhi janë të detyrueshëm.')
+      return
+    }
+
     setStatus('sending')
     setErrorMsg('')
 
+    // Provon ruajtjen/email nëse MySQL/Resend janë aktiv (opsionale)
     try {
-      const res = await fetch('/api/contact', {
+      await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.get('name'),
-          email: formData.get('email'),
-          phone: formData.get('phone') || null,
-          message: formData.get('message'),
-          requestType: formData.get('requestType') || 'general',
-          preferredDate: needsDateTime ? formData.get('preferredDate') || null : null,
-          preferredTime: needsDateTime ? formData.get('preferredTime') || null : null,
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone || null,
+          message: payload.message,
+          requestType: payload.requestType,
+          preferredDate: payload.preferredDate || null,
+          preferredTime: payload.preferredTime || null,
         }),
       })
-
-      const data = await res.json()
-
-      if (res.ok && data.success) {
-        setEmailSent(data.emailSent !== false)
-        setStatus('done')
-        form.reset()
-        setRequestType('general')
-        setPhoneValue('')
-      } else {
-        setStatus('error')
-        setErrorMsg(data.error || 'Diçka shkoi keq.')
-      }
     } catch {
-      setStatus('error')
-      setErrorMsg('Diçka shkoi keq. Provoni përsëri.')
+      // WhatsApp është rruga kryesore — API është bonus
     }
+
+    const waUrl = whatsappHref(SITE.whatsappE164, buildWhatsAppText(payload))
+    window.open(waUrl, '_blank', 'noopener,noreferrer')
+
+    setStatus('done')
+    form.reset()
+    setRequestType('general')
+    setPhoneValue('')
   }
 
   return (
@@ -135,7 +177,7 @@ export function ContactForm() {
         </div>
       </div>
       {needsDateTime && (
-        <div className="grid gap-4 sm:grid-cols-2 rounded-xl border border-slate-100 bg-sky-50/70 dark:bg-brand-950/40 dark:border-brand-700/40 p-4">
+        <div className="grid gap-4 sm:grid-cols-2 rounded-xl border border-slate-200 bg-slate-50 dark:bg-brand-950/40 dark:border-white/10 p-4">
           <div className="space-y-2">
             <label
               htmlFor="preferredDate"
@@ -163,7 +205,7 @@ export function ContactForm() {
               id="preferredTime"
               name="preferredTime"
               required={needsDateTime}
-              className="flex h-10 min-h-[44px] w-full rounded-lg border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-base text-slate-900 dark:text-slate-100 shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/50"
+              className="flex h-10 min-h-[44px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-base text-slate-900 dark:text-slate-100 shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/50"
             >
               <option value="">Zgjidhni orën</option>
               {TIME_SLOTS.map((slot) => (
@@ -182,7 +224,7 @@ export function ContactForm() {
         <Textarea
           id="message"
           name="message"
-          placeholder="Mesazhi juaj..."
+          placeholder="Përshkruani projektin ose kërkesën tuaj..."
           rows={5}
           required
         />
@@ -193,20 +235,25 @@ export function ContactForm() {
           aria-live="polite"
           className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800 dark:border-green-800/60 dark:bg-green-950/35 dark:text-green-300"
         >
-          <p className="font-semibold">Mesazhi u dërgua me sukses.</p>
-          <p className="mt-1">
-            {emailSent
-              ? 'Faleminderit! Do t\u2019ju kontaktojmë së shpejti.'
-              : 'Faleminderit! Kërkesa u pranua dhe do t\u2019ju kontaktojmë së shpejti.'}
-          </p>
+          <p className="font-semibold">WhatsApp u hap me mesazhin tuaj.</p>
+          <p className="mt-1">Dërgoni mesazhin atje — do t&apos;ju përgjigjemi së shpejti.</p>
         </div>
       )}
       {status === 'error' && (
         <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>
       )}
-      <Button type="submit" variant="amber" size="lg" className="w-full sm:w-auto min-h-[44px] touch-manipulation" disabled={status === 'sending'}>
-        {status === 'sending' ? 'Duke dërguar…' : 'Dërgo mesazhin'}
+      <Button
+        type="submit"
+        variant="amber"
+        size="lg"
+        className="w-full sm:w-auto min-h-[44px] touch-manipulation"
+        disabled={status === 'sending'}
+      >
+        {status === 'sending' ? 'Duke hapur…' : 'Dërgo në WhatsApp'}
       </Button>
+      <p className="text-xs text-slate-500 dark:text-slate-400">
+        Mesazhi hapet në WhatsApp te {SITE.whatsappDisplay}. Mund të na telefononi edhe drejtpërdrejt.
+      </p>
     </form>
   )
 }

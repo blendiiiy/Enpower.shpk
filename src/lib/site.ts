@@ -7,8 +7,11 @@ export const SITE = {
   url: 'https://enpower-ks.com',
   email: 'enpower@gmail.com',
   phoneDisplay: '+383 44 222 836',
-  /** E.164 without spaces — for tel: and wa.me */
+  /** E.164 without spaces — for tel: */
   phoneE164: '+38344222836',
+  /** WhatsApp (mund të jetë numër tjetër nga telefoni) */
+  whatsappDisplay: '+383 48 666 044',
+  whatsappE164: '+38348666044',
   address: 'Kline, Kosovë',
   facebookUrl: 'https://www.facebook.com/EnpowerShpk',
   facebookLabel: 'Enpower sh.p.k',
@@ -16,7 +19,7 @@ export const SITE = {
 } as const
 
 export function whatsappHref(
-  phoneE164: string = SITE.phoneE164,
+  phoneE164: string = SITE.whatsappE164,
   text: string = SITE.whatsappPrefill
 ) {
   const digits = phoneE164.replace(/[^\d+]/g, '')

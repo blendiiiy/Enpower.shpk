@@ -6,9 +6,9 @@ import { SITE } from '@/lib/site'
 
 const base = SITE.url
 export const metadata: Metadata = {
-  title: 'Rreth nesh | Enpower sh.p.k',
+  title: 'Rreth nesh',
   description:
-    'Njihuni me Enpower sh.p.k: ekip profesional për rrjete elektrike TL/TM, trafostacione dhe ndriçim. Zbatim i sigurt dhe profesional në Kosovë.',
+    'Njihuni me Enpower sh.p.k: ekip profesional për rrjete elektrike TL/TM, trafostacione, ndriçim dhe mirëmbajtje në Kosovë.',
   alternates: { canonical: `${base}/about` },
   openGraph: {
     type: 'website',
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
-  const stats = [
-    { label: 'Përkushtuar energjisë elektrike', value: '2015+', hint: 'vite eksperiencë e skadrit' },
-    { label: 'Projekte TL / TM & infrastrukturë', value: '120+', hint: 'punime të dokumentuara në terren' },
-    { label: 'Fokusi i ekipit', value: 'Siguri', hint: 'sipas kërkesave teknike lokale' },
+  const highlights = [
+    { label: 'Fokusi', value: 'Siguri teknike', hint: 'Sipas kërkesave teknike dhe procedurave të punës' },
+    { label: 'Fushat', value: 'TL / TM & infrastrukturë', hint: 'Rrjete, trafostacione dhe ndriçim' },
+    { label: 'Mbulimi', value: 'Publik & privat', hint: 'Industri, infrastrukturë dhe objekte lokale' },
   ]
 
   const values = [
@@ -72,17 +72,19 @@ export default function AboutPage() {
 
         <section
           className="mb-14 sm:mb-16 grid gap-4 sm:grid-cols-3"
-          aria-label="Statistika për Enpower sh.p.k"
+          aria-label="Pikat kryesore të Enpower sh.p.k"
         >
-          {stats.map((item) => (
+          {highlights.map((item) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50/90 p-6 shadow-card dark:border-slate-700/60 dark:from-brand-900/40 dark:to-brand-950/60"
+              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-brand-900/40"
             >
-              <p className="text-3xl font-extrabold tracking-tight text-brand-800 dark:text-blue-300">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">
+                {item.label}
+              </p>
+              <p className="mt-2 font-display text-xl font-semibold tracking-tight text-brand-900 dark:text-white">
                 {item.value}
               </p>
-              <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">{item.label}</p>
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{item.hint}</p>
             </div>
           ))}
@@ -103,7 +105,7 @@ export default function AboutPage() {
               {[
                 { year: 'Fillimi', text: 'Ndërtimi i kapaciteteve për punime në rrjete TM dhe ndriçim publik.' },
                 { year: 'Zgjerimi', text: 'Montim trafostacionesh, trafo private për industrinë dhe shërbimin e mirëmbajtjes.' },
-                { year: 'Sot', text: 'Ekip i certifikuar që mbulon të gjithë ciklin jetësor të një projekti energjetik.' },
+                { year: 'Sot', text: 'Ekip profesional që mbulon planifikimin, zbatimin dhe dorëzimin e projekteve energjetike.' },
               ].map((step) => (
                 <div key={step.year}>
                   <p className="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-blue-400">{step.year}</p>

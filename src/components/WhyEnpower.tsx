@@ -3,8 +3,8 @@ import { BadgeCheck, ShieldCheck, Handshake } from 'lucide-react'
 export function WhyEnpower() {
   const bullets = [
     {
-      title: 'Profesionalë të certifikuar',
-      text: 'Ekip me kualifikime dhe përvojë reale në projekte energjetike.',
+      title: 'Ekip profesional',
+      text: 'Staf me përvojë në terren për projekte energjetike TL/TM dhe infrastrukturë.',
       Icon: BadgeCheck,
     },
     {

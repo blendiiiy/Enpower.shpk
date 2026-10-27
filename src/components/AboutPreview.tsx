@@ -14,12 +14,11 @@ export function AboutPreview() {
             </h2>
             <div className="section-title-accent-left" aria-hidden />
             <p className="mt-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-              Enpower sh.p.k është kompani kosovare e specializuar në energji elektrike — rrjete TL/TM,
-              trafostacione dhe ndriçim — me fokus në siguri dhe performancë afatgjatë.
+              Enpower sh.p.k është kompani kosovare e specializuar në energji elektrike: rrjete TL/TM,
+              trafostacione, ndriçim dhe mirëmbajtje — me fokus në siguri dhe performancë afatgjatë.
             </p>
             <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
-              Stafi ynë profesional realizon projekte që plotësojnë kërkesat teknike dhe ligjore për sektorin
-              publik dhe privat.
+              Stafi ynë profesional realizon projekte që plotësojnë kërkesat teknike për sektorin publik dhe privat.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-5">
               <Link href="/about" className="btn-primary">

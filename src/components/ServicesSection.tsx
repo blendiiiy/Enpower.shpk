@@ -1,26 +1,12 @@
 import Link from 'next/link'
+import { Cable, Lightbulb, TowerControl, Wrench } from 'lucide-react'
+import { SERVICES } from '@/lib/services'
 
-const services = [
-  {
-    num: '01',
-    title: 'Rrjete Elektrike TL & TM',
-    summary: 'Projektim, instalim dhe rehabilitim i rrjeteve për furnizim stabil.',
-  },
-  {
-    num: '02',
-    title: 'Trafostacione & Trafo Private',
-    summary: 'Zgjidhje të plota për biznese, industri dhe objekte publike.',
-  },
-  {
-    num: '03',
-    title: 'Ndriçim Elektrik',
-    summary: 'Sisteme moderne ndriçimi me fokus në efikasitet energjetik.',
-  },
-]
+const ICONS = [Cable, TowerControl, Lightbulb, Wrench] as const
 
 export function ServicesSection() {
   return (
-    <section className="page-band page-band--muted">
+    <section className="page-band page-band--muted" id="sherbimet">
       <div className="layout-container">
         <div className="section-intro">
           <p className="eyebrow">Shërbimet</p>
@@ -29,33 +15,41 @@ export function ServicesSection() {
           </h2>
           <div className="section-title-accent" aria-hidden />
           <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            Zgjidhje të plota energjetike — nga një burim i vetëm profesional.
+            Rrjete TL/TM, trafostacione, ndriçim dhe mirëmbajtje — zgjidhje profesionale për sektorin publik dhe privat.
           </p>
         </div>
-        <div className="divide-y divide-slate-200/80 dark:divide-white/10 border-y border-slate-200/80 dark:border-white/10">
-          {services.map(({ num, title, summary }) => (
-            <div
-              key={num}
-              className="grid gap-3 sm:grid-cols-[auto_1fr] sm:items-baseline py-8 sm:py-10 sm:gap-10"
-            >
-              <span className="font-display text-sm font-semibold tracking-[0.2em] text-brand-500">
-                {num}
-              </span>
-              <div>
-                <h3 className="font-display text-xl sm:text-2xl font-semibold text-brand-900 dark:text-white">
-                  {title}
+        <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
+          {SERVICES.map((service, i) => {
+            const Icon = ICONS[i % ICONS.length]
+            return (
+              <article
+                key={service.id}
+                className="rounded-[1.25rem] border border-slate-200 bg-white p-6 sm:p-8 shadow-soft dark:border-white/10 dark:bg-brand-900/40"
+              >
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600 text-white">
+                  <Icon className="h-5 w-5" strokeWidth={2.25} aria-hidden />
+                </div>
+                <h3 className="mt-5 font-display text-xl font-semibold text-brand-900 dark:text-white">
+                  {service.title}
                 </h3>
-                <p className="mt-2 max-w-2xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {summary}
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {service.summary}
                 </p>
-              </div>
-            </div>
-          ))}
+                <Link
+                  href="/services"
+                  className="cta-inline mt-5 !text-brand-800 dark:!text-brand-200"
+                >
+                  Detaje
+                  <span aria-hidden>→</span>
+                </Link>
+              </article>
+            )
+          })}
         </div>
         <div className="mt-12 text-center">
           <Link href="/services" className="btn-primary">
             Të gjitha shërbimet
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>

@@ -4,24 +4,22 @@ import { WhyEnpower } from '@/components/WhyEnpower'
 import { AboutPreview } from '@/components/AboutPreview'
 import { ServicesSection } from '@/components/ServicesSection'
 import { ProjectsPreview } from '@/components/ProjectsPreview'
-import { StatsSection } from '@/components/StatsSection'
 import { CTA } from '@/components/CTA'
 import { AnimatedSection } from '@/components/AnimatedSection'
 import { TrustPartnersStrip } from '@/components/TrustPartnersStrip'
-import { TestimonialsSection } from '@/components/TestimonialsSection'
 import { SITE } from '@/lib/site'
 
 const base = SITE.url
 export const metadata: Metadata = {
-  title: 'Kryefaqja | Enpower sh.p.k',
+  title: 'Kryefaqja',
   description:
-    'Enpower sh.p.k ofron zgjidhje profesionale në energji elektrike në Kosovë: TL/TM, trafostacione, ndriçim dhe mirëmbajtje.',
+    'Enpower sh.p.k — zgjidhje profesionale në energji elektrike në Kosovë: rrjete TL/TM, trafostacione, ndriçim dhe mirëmbajtje.',
   alternates: { canonical: base },
   openGraph: {
     type: 'website',
-    title: 'Enpower sh.p.k | Zgjidhje Profesionale në Energji Elektrike',
+    title: 'Enpower sh.p.k | Energji elektrike profesionale në Kosovë',
     description:
-      'Partneri juaj për projekte energjetike të sigurta, efikase dhe profesionale në Kosovë.',
+      'Rrjete TL/TM, trafostacione, ndriçim dhe mirëmbajtje për sektorin publik dhe privat.',
     url: base,
     images: [
       {
@@ -37,9 +35,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <AnimatedSection>
-        <Hero />
-      </AnimatedSection>
+      <Hero />
       <AnimatedSection delay={0.03}>
         <TrustPartnersStrip />
       </AnimatedSection>
@@ -50,16 +46,10 @@ export default function HomePage() {
         <AboutPreview />
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
-        <StatsSection />
-      </AnimatedSection>
-      <AnimatedSection delay={0.05}>
         <ServicesSection />
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
         <ProjectsPreview />
-      </AnimatedSection>
-      <AnimatedSection delay={0.05}>
-        <TestimonialsSection />
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
         <CTA />

@@ -5,7 +5,7 @@
 export const SITE = {
   name: 'Enpower sh.p.k',
   url: 'https://enpower-ks.com',
-  email: 'enpower@gmail.com',
+  email: 'enpowershpk@gmail.com',
   phoneDisplay: '+383 44 222 836',
   /** E.164 without spaces — for tel: */
   phoneE164: '+38344222836',

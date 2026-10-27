@@ -72,7 +72,7 @@ export function ProjectsGallery() {
                   onClick={() => setSelectedItem(item)}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  fit="contain"
+                  fit="cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/30 to-transparent opacity-100 transition-opacity" />
                 <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 opacity-100 transition-opacity">

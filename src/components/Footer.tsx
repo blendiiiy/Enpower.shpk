@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { BrandLogo } from '@/components/BrandLogo'
-import { SITE } from '@/lib/site'
+import { SITE, whatsappHref } from '@/lib/site'
 
 const links = [
   { href: '/', label: 'Kryefaqja' },
@@ -20,7 +20,7 @@ export function Footer() {
               <BrandLogo variant="dark" imgClassName="h-12 sm:h-14 w-auto object-contain" />
             </Link>
             <p className="mt-5 text-sm text-slate-400 max-w-sm leading-relaxed">
-              Zgjidhje profesionale në energji elektrike në Kosovë. TL, TM, ndriçim dhe trafostacione.
+              Zgjidhje profesionale në energji elektrike në Kosovë: TL/TM, trafostacione, ndriçim dhe mirëmbajtje.
             </p>
           </div>
           <div>
@@ -47,6 +47,16 @@ export function Footer() {
               <li>
                 <a href={`tel:${SITE.phoneE164}`} className="hover:text-white transition-colors">
                   {SITE.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={whatsappHref()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  WhatsApp {SITE.whatsappDisplay}
                 </a>
               </li>
               <li>

@@ -17,7 +17,7 @@ export function CTA() {
           Keni një projekt elektrik?
         </h2>
         <p className="mt-5 text-slate-300 max-w-xl mx-auto text-lg leading-relaxed">
-          Na shkruani për ofertë të përshtatur — rrjet TM/TL, trafostacion ose ndriçim.
+          Na shkruani për ofertë — rrjet TL/TM, trafostacion, ndriçim ose mirëmbajtje.
         </p>
         <Link href="/contact" className="btn-primary btn-primary-lg mt-10 inline-flex">
           Kërko ofertë
